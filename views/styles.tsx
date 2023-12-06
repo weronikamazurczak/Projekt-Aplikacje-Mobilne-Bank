@@ -136,6 +136,41 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 2.62,
         elevation: 4,
+    },
+    titleAddCard:{
+        width: 200,
+        height: 34,
+        fontWeight: 'bold',
+        fontSize: 32,
+        marginTop: '5%',
+        paddingTop: 9,
+        marginLeft: '7%',
+        color: '#000', 
+        marginBottom:40,
+    },
+    checkTitleStyle:{
+        fontSize: 12 ,
+        color: '#C1C1C1',
+        
+    }
+    ,addCardNaxtButton:{
+        width: 349,
+        height: 39,
+        backgroundColor: '#5AE4A8',
+        color: '#fff',
+        alignItems: 'center',
+        borderRadius: 10,
+        marginTop: '5%',
+        marginBottom: '3%',
+        marginLeft: '5%',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 2.62,
+        elevation: 4,
     }
     
 });

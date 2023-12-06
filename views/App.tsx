@@ -7,6 +7,7 @@ import SplashScreen from './SplashScreen';
 import { useEffect } from 'react';
 import Login from './Login';
 import Register from './Register';
+import { AddCard } from './AddCard';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,11 +17,12 @@ export default function App() {
   return (
     <GluestackUIProvider config={config}>
         <NavigationContainer>
-          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='SplashScreen'>
+          <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='AddCard'>
             <Stack.Screen name="SplashScreen" component={SplashScreen} />
             <Stack.Screen name="OnboardScreens" component={OnboardScreens} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name = "AddCard" component={AddCard} />
           </Stack.Navigator>
         </NavigationContainer>
     </GluestackUIProvider>
