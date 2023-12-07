@@ -171,6 +171,24 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 2.62,
         elevation: 4,
+    },
+    main:{
+        flex: 1,
+    },
+    awatar:{
+        height: 50,
+        marginLeft: '5%',
+        marginTop:'5%',
+    },
+    bell:{
+        position: 'absolute',
+        marginLeft: '81%',
+        marginTop: '5%',
+    },
+    card:{
+        width: 340,
+        height: 180,
+        color:'#5AE4A8'
     }
     
 });
