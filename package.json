@@ -14,6 +14,7 @@
     "@gluestack-ui/config": "latest",
     "@gluestack-ui/themed": "latest",
     "@legendapp/motion": "latest",
+    "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "expo": "^49.0.21",
@@ -21,13 +22,14 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.72.6",
+    "react-native-credit-card": "^0.1.9",
     "react-native-onboarding-swiper": "^1.2.0",
     "react-native-svg": "13.9.0",
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@expo/webpack-config": "^19.0.0",
+    "@expo/webpack-config": "^0.12.52",
     "@types/react": "~18.2.14",
     "@types/react-native-onboarding-swiper": "^1.1.7",
     "typescript": "^5.1.3"
