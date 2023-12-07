@@ -14,11 +14,13 @@ import styles from "./styles";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }: any) {
   return (
     <View style={styles.main}>
       <VStack space="2xl" style={styles.awatar}>
-      <Pressable onPress={() => {}}>
+      <Pressable 
+      onPress={() => navigation.navigate("Notification") }
+      >
           <FontAwesome5
             name="bell"
             size={50}

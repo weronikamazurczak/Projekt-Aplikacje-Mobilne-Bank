@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     },
     kropk1:{
         justifyContent: 'center',
-        paddingTop: -20,
+        paddingTop: '13%',
     },
     img:{
         height: 424,
