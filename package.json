@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@expo/webpack-config": "^0.12.52",
+    "@expo/webpack-config": "^19.0.0",
     "@types/react": "~18.2.14",
     "@types/react-native-onboarding-swiper": "^1.1.7",
     "typescript": "^5.1.3"

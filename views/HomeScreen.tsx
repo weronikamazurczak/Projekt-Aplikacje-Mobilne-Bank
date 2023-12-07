@@ -30,7 +30,10 @@ export default function HomeScreen() {
           <Avatar>
             <AvatarFallbackText>A</AvatarFallbackText>
             <AvatarImage
-            // tu dodac jakos awatar
+            source={{
+              uri: "https://i.imgur.com/sdc68pF.png",
+            }}
+            alt = 'zdjecie'
             />
           </Avatar>
           <VStack>

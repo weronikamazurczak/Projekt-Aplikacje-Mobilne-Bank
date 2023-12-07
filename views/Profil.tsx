@@ -4,7 +4,7 @@ import { Center } from '@gluestack-ui/themed'
 
 export default function Profil() {
   return (
-    <View style={{flex:1, alignItems:'center'}}>
+    <View style={{flex:1, alignItems:'center', justifyContent: 'center'}}>
       <Text>Profil</Text>
     </View>
   )

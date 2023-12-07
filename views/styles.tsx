@@ -188,7 +188,8 @@ const styles = StyleSheet.create({
     card:{
         width: 340,
         height: 180,
-        color:'#5AE4A8'
+        color:'#5AE4A8',
+        flex:1, alignItems:'center', justifyContent: 'center'
     }
     
 });

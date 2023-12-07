@@ -101,6 +101,7 @@ export default function Register({navigation}:any ) {
         </View>
 
         <Button
+            onPress={()=> navigation.navigate("AddCard")}
             style={styles.registerNextButton}
             size="lg"
             variant="solid"

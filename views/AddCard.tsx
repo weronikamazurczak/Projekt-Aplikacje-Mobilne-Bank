@@ -4,7 +4,7 @@ import styles from "./styles";
 import React from "react";
 import { MaterialIcons } from '@expo/vector-icons';
 
-export const AddCard = () => {
+export const AddCard = ({navigation}:any ) => {
 
 
   return (
@@ -88,6 +88,7 @@ export const AddCard = () => {
       </Checkbox>
 
       <Button
+      onPress={()=> navigation.navigate("FaceVerification")}
         style={styles.addCardNaxtButton}
         size="lg"
         variant="solid"
