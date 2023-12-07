@@ -31,7 +31,7 @@ function TabNavigator() {
       initialRouteName="Pulpit"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#254C48',
+        tabBarActiveTintColor: '#5ae4a8',
         tabBarInactiveTintColor: "black",
       }}
     >
@@ -40,7 +40,7 @@ function TabNavigator() {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <Ionicons name="ios-home-outline" size={24} color="black" />
+            <Ionicons name="ios-home-outline" size={24} color = {color} />
           ),
         }}
       />
@@ -49,7 +49,7 @@ function TabNavigator() {
         component={Historia}
         options={{
           tabBarIcon: ({ color }) => (
-            <AntDesign name="calendar" size={24} color="black" />
+            <AntDesign name="calendar" size={24} color = {color} />
           ),
         }}
       />
@@ -61,7 +61,7 @@ function TabNavigator() {
             <MaterialCommunityIcons
               name="wallet-outline"
               size={24}
-              color="black"
+              color = {color}
             />
           ),
         }}
@@ -71,7 +71,7 @@ function TabNavigator() {
         component={Profil}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="user" size={24} color="black" />
+            <FontAwesome5 name="user" size={24} color = {color} />
           ),
         }}
       />

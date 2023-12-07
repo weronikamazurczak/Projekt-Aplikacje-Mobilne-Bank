@@ -12,6 +12,7 @@ import {
 import React from "react";
 import styles from "./styles";
 import { FontAwesome5 } from "@expo/vector-icons";
+import CreditCardUI from "rn-credit-card-ui/src/components/CreditCardUI";
 
 
 export default function HomeScreen({ navigation }: any) {
@@ -19,17 +20,16 @@ export default function HomeScreen({ navigation }: any) {
     <View style={styles.main}>
       <VStack space="2xl" style={styles.awatar}>
       <Pressable 
-      onPress={() => navigation.navigate("Notification") }
+      onPress={() => navigation.navigate("Notification")  }style={styles.bell}
       >
           <FontAwesome5
             name="bell"
             size={50}
-            color="#254C48"
-            style={styles.bell}
+            color="#254C48" 
           />
         </Pressable>
         <HStack space="md">
-          <Avatar>
+          <Avatar >
             <AvatarFallbackText>A</AvatarFallbackText>
             <AvatarImage
             source={{
@@ -46,9 +46,24 @@ export default function HomeScreen({ navigation }: any) {
       </VStack>
 
       <View style={styles.card}>
-        <Text>
-          KARTA KREDYTOWA
-        </Text>
+      <CreditCardUI 
+            cardNumber="4242424242424242"
+            cvc="123"
+            holderGender="miss"
+            holderName="Maria James"
+            expiryDate="11/23"
+            bankName={"Bank of Sky"}
+            bankLogo={{
+                uri:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/1024px-Earth_Eastern_Hemisphere.jpg"
+            }}
+            bankLogoStyle={{
+                borderRadius:100
+            }}
+            isCardNumberShown={false}
+            isHorizontalFlipEnabled={true}
+            isVerticalFlipEnabled={false}
+            dateLabel="VALID"
+        />
       </View>
 
 

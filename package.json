@@ -25,7 +25,8 @@
     "react-native-credit-card": "^0.1.9",
     "react-native-onboarding-swiper": "^1.2.0",
     "react-native-svg": "13.9.0",
-    "react-native-web": "~0.19.6"
+    "react-native-web": "~0.19.6",
+    "rn-credit-card-ui": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
