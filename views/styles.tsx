@@ -196,11 +196,43 @@ const styles = StyleSheet.create({
     height: 250,
     width: 250,
     alignSelf: "center",
+    marginTop: '30%',
   },
   rejest:{
     flexDirection: 'row',
     marginLeft: '25%',
-  }
+  },
+  profil: {
+    flex: 1,
+  },
+  titleProfil: {
+    width: 200,
+    height: 34,
+    fontWeight: "bold",
+    fontSize: 32,
+    marginLeft: "15%",
+    color: "#000",
+  },
+  nameProfil:{
+    fontSize: 26,
+    color: "#000",
+    fontWeight: "bold",
+    alignSelf: "center",
+    padding: 2,
+    marginTop: '3%',
+  },
+  profilAwatar: {
+    height: 80,
+    width: 80,
+    alignSelf: "center",
+    marginTop: '3%',
+  },
+  mailProfil:{
+    fontSize: 14,
+    color: "#AEAEAE",
+    alignSelf: "center",
+    marginBottom: '15%',
+  },
 });
 
 export default styles;

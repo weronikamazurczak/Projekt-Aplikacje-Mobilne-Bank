@@ -49,7 +49,7 @@ export default function HomeScreen({ navigation }: any) {
       <CreditCardUI 
             cardNumber="4242424242424242"
             cvc="123"
-            holderGender="miss"
+            holderGender=""
             holderName="Maria James"
             expiryDate="11/23"
             bankName={"Bank of Sky"}

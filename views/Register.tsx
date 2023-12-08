@@ -39,7 +39,7 @@ export default function Register({ navigation }: any) {
 
   return (
     <ScrollView style={styles.register}>
-      <Pressable onPress={() => {}} style={styles.arrow}>
+      <Pressable onPress={() => {navigation.navigate("Login")}} style={styles.arrow}>
         <AntDesign name="arrowleft" size={50} color="black" />
       </Pressable>
 

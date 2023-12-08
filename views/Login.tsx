@@ -116,7 +116,7 @@ export default function Login({ navigation }: any) {
         isDisabled={false}
         isFocusVisible={false}
       >
-        <ButtonText style={{ color: "#000" }}>Dalej</ButtonText>
+        <ButtonText style={{ color: "#000" }}>Zaloguj się</ButtonText>
       </Button>
 
       <View style={styles.rejest}>
