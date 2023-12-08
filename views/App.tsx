@@ -94,6 +94,7 @@ export default function App() {
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="AddCard" component={AddCard} />
           <Stack.Screen name="FaceVerification" component={FaceVerification} />
+          <Stack.Screen name="Profil" component={Profil} />
           <Stack.Screen
             name="FingerVerification"
             component={FingerVerification}
@@ -104,7 +105,7 @@ export default function App() {
           />
           <Stack.Screen name="Notification" component={Notification} />
 
-          <Stack.Screen name="Home" component={TabNavigator} />
+          <Stack.Screen name="Home" component={TabNavigator}/>
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>
