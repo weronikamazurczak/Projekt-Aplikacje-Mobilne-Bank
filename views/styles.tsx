@@ -189,6 +189,18 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginBottom: "70%",
   },
+  login:{
+    flex: 1,
+  },
+  logo:{
+    height: 250,
+    width: 250,
+    alignSelf: "center",
+  },
+  rejest:{
+    flexDirection: 'row',
+    marginLeft: '25%',
+  }
 });
 
 export default styles;

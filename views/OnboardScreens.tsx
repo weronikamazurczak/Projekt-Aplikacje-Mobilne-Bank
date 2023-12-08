@@ -11,12 +11,12 @@ export default function OnboardScreens({navigation}:any ) {
     <View style={styles.ladowanie}>
     <Onboarding 
     bottomBarColor = "#fff"
-    onDone={()=>{navigation.navigate('Register')}}
+    onDone={()=>{navigation.navigate('Login')}}
     DoneButtonComponent={Done}
     NextButtonComponent={Next}
     DotComponent={Square}
     SkipButtonComponent={Skip}
-    onSkip={()=>{navigation.navigate('Register')}}
+    onSkip={()=>{navigation.navigate('Login')}}
 pages={[
   {
     backgroundColor: '#fff',
