@@ -22,6 +22,9 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { LastTransaction } from "./LastTransaction";
+import Transfer from "./Transfer";
+import TransferCompleted from "./TransferCompleted";
+import Send from "./Send";
 
 
 const Stack = createNativeStackNavigator();
@@ -87,7 +90,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
-          initialRouteName="LastTransaction"
+          initialRouteName="SplashScreen"
         >
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="OnboardScreens" component={OnboardScreens} />
@@ -107,7 +110,11 @@ export default function App() {
           <Stack.Screen name="Notification" component={Notification} />
 
           <Stack.Screen name="Home" component={TabNavigator}/>
+          <Stack.Screen name="Products" component={Products}/>
           <Stack.Screen name= "LastTransaction" component={LastTransaction}/>
+          <Stack.Screen name="Transfer" component={Transfer} />
+          <Stack.Screen name="TransferCompleted" component={TransferCompleted} />
+          <Stack.Screen name="Send" component={Send} />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>
