@@ -50,15 +50,15 @@ export const LastTransaction = () => {
       </Pressable>
 
       <Text style={{
-            paddingVertical:4,
+            paddingTop:10,
             fontWeight: "bold",
-            fontSize: 24,
-            marginLeft: 50,
+            fontSize: 32,
+            marginLeft: 10,
             color: "#000",
       }}>Ostatnie Transakcje</Text>
       
                 {transaction.map((item,index)=>{
-                   return <View key={index}><Text style={{ fontWeight: 'bold', fontSize: 18, marginTop: 10, backgroundColor:"#cccccc",padding:5, textAlign:"center" }}>{item.dateTime}</Text>
+                   return <View key={index}><Text style={{ fontWeight: 'bold', fontSize: 18, marginTop: 20, backgroundColor:"#cccccc",padding:5, textAlign:"center" }}>{item.dateTime}</Text>
                            {TransactionElement(item.transactionList,item.dateTime)}
                             </View>
                    

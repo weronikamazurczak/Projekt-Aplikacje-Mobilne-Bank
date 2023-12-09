@@ -1,10 +1,8 @@
-import { View, Text } from 'react-native'
 import React from 'react'
+import { LastTransaction } from './LastTransaction'
 
 export default function Historia() {
   return (
-    <View style={{flex:1, alignItems:'center'}}>
-      <Text>History</Text>
-    </View>
+      <LastTransaction/>
   )
 }
