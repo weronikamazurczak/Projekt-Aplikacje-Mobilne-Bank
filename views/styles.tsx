@@ -93,6 +93,14 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
     marginLeft: "5%",
   },
+  arrowProduct:{
+    width: 40,
+    height: 40,
+    marginTop: "15%",
+    marginLeft: "5%",
+    marginBottom:10,
+  }
+  ,
   bottomTitle: {
     width: 310,
     height: 50,
@@ -335,6 +343,14 @@ const styles = StyleSheet.create({
     color: "#000",
     marginTop: '6%',
     marginLeft: "5%",
+  },
+  iconProduct:{
+    width: 110,
+    height: 60,
+    marginLeft: "5%",
+    marginBottom:30,
+    flexDirection: 'row',
+    gap:25
   }
  
 });
