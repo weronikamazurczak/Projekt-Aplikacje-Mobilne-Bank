@@ -1,4 +1,4 @@
-import { Text, Pressable } from 'react-native'
+import { Text, Pressable, ScrollView } from 'react-native'
 import React from 'react'
 import styles from './styles'
 import { AntDesign } from "@expo/vector-icons";
@@ -7,7 +7,7 @@ import { ButtonText, FormControl, FormControlLabel, FormControlLabelText, Headin
 
 export default function Transfer({ navigation }: any) {
   return (
-    <View style={styles.transfer}>
+    <ScrollView style={styles.transfer}>
       <Pressable onPress={() => {navigation.navigate("Products")}} style={styles.arrow}>
         <AntDesign name="arrowleft" size={50} color="black" />
       </Pressable>
@@ -40,7 +40,7 @@ export default function Transfer({ navigation }: any) {
                 </FormControlLabelText>
             </FormControlLabel>
             <Input style={styles.boxTransfer}>
-              <InputField fontSize={14} color='#AEAEAE'
+              <InputField fontSize={14} 
                 type="text"
                 placeholder='Wyszukaj odbiorce po imieniu lub email'
               />
@@ -54,7 +54,7 @@ export default function Transfer({ navigation }: any) {
                 </FormControlLabelText>
             </FormControlLabel>
             <Input style={styles.boxTransfer}>
-              <InputField fontSize={14} color='#AEAEAE'
+              <InputField fontSize={14}
                 type="text"
                 placeholder='Wpisz kwotę'
                 
@@ -73,7 +73,7 @@ export default function Transfer({ navigation }: any) {
                 </FormControlLabelText>
             </FormControlLabel>
             <Input style={styles.boxTransfer}>
-              <InputField fontSize={14} color='#AEAEAE'
+              <InputField fontSize={14}
                 type="text"
                 placeholder='Przelew środków'
                 
@@ -85,7 +85,7 @@ export default function Transfer({ navigation }: any) {
           </View>
 
           <Button
-      onPress={() => {navigation.navigate("Products")}}
+      onPress={() => {navigation.navigate("TransferCompleted")}}
       style={styles.registerNextButton}
         size="lg"
         variant="solid"
@@ -98,6 +98,6 @@ export default function Transfer({ navigation }: any) {
       </Button>
           
 
-    </View>
+    </ScrollView>
   )
 }

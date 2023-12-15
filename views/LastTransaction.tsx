@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, Pressable } from "@gluestack-ui/themed"
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
+import React from 'react'
 interface TransactionListI{
     name:string
     amount:number

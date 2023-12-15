@@ -5,10 +5,10 @@ import styles from "./styles";
 import { Octicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
-export default function Products() {
+export default function Products({ navigation }: any) {
   return (
     <View>
-              <Pressable onPress={() => {}} style={styles.arrowProduct}>
+              <Pressable onPress={() => {navigation.navigate("Home")}} style={styles.arrowProduct}>
         <AntDesign name="arrowleft" size={40} color="black" />
       </Pressable>
 
@@ -23,7 +23,7 @@ export default function Products() {
           <View style={{
             marginLeft:20
           }}>
-          <Pressable onPress={() => {}} style={styles.iconProduct}>
+          <Pressable onPress={() => {navigation.navigate("Send")}} style={styles.iconProduct}>
           <MaterialCommunityIcons name="bank-transfer-out" size={40} color="black" style={{
             backgroundColor:"#90EE90", padding:5
           }}/>
@@ -35,7 +35,7 @@ export default function Products() {
           }}/>
         <Text padding={5} paddingVertical={20} fontSize={20} color="black">Historia</Text>
       </Pressable>
-      <Pressable onPress={() => {}} style={styles.iconProduct}>
+      <Pressable onPress={() => {navigation.navigate("Transfer")}} style={styles.iconProduct}>
       <Octicons name="arrow-switch" size={40} color="black" style={{
             backgroundColor:"#90EE90", padding:10
           }}/>
