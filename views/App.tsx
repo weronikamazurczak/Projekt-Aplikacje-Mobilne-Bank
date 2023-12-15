@@ -24,6 +24,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import Transfer from "./Transfer";
 import TransferCompleted from "./TransferCompleted";
 import Send from "./Send";
+import Send2 from "./Send2";
 
 
 const Stack = createNativeStackNavigator();
@@ -113,6 +114,7 @@ export default function App() {
           <Stack.Screen name="Transfer" component={Transfer} />
           <Stack.Screen name="TransferCompleted" component={TransferCompleted} />
           <Stack.Screen name="Send" component={Send} />
+          <Stack.Screen name="Send2" component={Send2} />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>

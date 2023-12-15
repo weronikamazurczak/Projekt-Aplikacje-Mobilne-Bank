@@ -35,7 +35,8 @@ export default function Send({ navigation }: any) {
         <Text style={styles.lastSend}>Ostatnie transakcje </Text>
 
         <View style={{ rowGap: 18 }}>
-        <HStack space="lg">
+          <Pressable onPress={() => {navigation.navigate("Send2")}}>
+        <HStack space="lg" >
         <Avatar size = "lg" style={styles.avatarSend}>
           <AvatarImage 
             source={require("../assets/awatar2.png")}
@@ -46,8 +47,11 @@ export default function Send({ navigation }: any) {
             <Text style={styles.namePerson}>Michał</Text>
           </VStack>
         </HStack>
+        </Pressable>
+        
         <Divider my="$0.5" />
 
+        <Pressable onPress={() => {navigation.navigate("Send2")}}>
         <HStack space="lg">
         <Avatar size = "lg" style={styles.avatarSend}>
           <AvatarImage 
@@ -59,8 +63,11 @@ export default function Send({ navigation }: any) {
             <Text style={styles.namePerson}>Bartłomiej</Text>
           </VStack>
         </HStack>
+        </Pressable>
+
         <Divider my="$0.5" />
 
+        <Pressable onPress={() => {navigation.navigate("Send2")}}>
         <HStack space="lg">
         <Avatar size = "lg" style={styles.avatarSend}>
           <AvatarImage 
@@ -72,7 +79,7 @@ export default function Send({ navigation }: any) {
             <Text style={styles.namePerson}>Katarzyna</Text>
           </VStack>
         </HStack>
-
+      </Pressable>
 
         </View>
 
