@@ -8,16 +8,20 @@ import {
   AvatarFallbackText,
   AvatarImage,
   Heading,
+  ScrollView,
 } from "@gluestack-ui/themed";
 import React from "react";
 import styles from "./styles";
 import { FontAwesome5 } from "@expo/vector-icons";
 import CreditCardUI from "rn-credit-card-ui/src/components/CreditCardUI";
+import { Octicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { LastTransaction } from "./LastTransaction";
 
 
 export default function HomeScreen({ navigation }: any) {
   return (
-    <View style={styles.main}>
+    <ScrollView style={styles.main}>
       <VStack space="2xl" style={styles.awatar}>
       <Pressable 
       onPress={() => navigation.navigate("Notification")  }style={styles.bell}
@@ -65,8 +69,44 @@ export default function HomeScreen({ navigation }: any) {
             dateLabel="VALID"
         />
       </View>
-
-
-    </View>
+      <View style={{
+            flexDirection: 'row',
+            justifyContent:"space-around"
+          }}>
+            <View>
+          <Pressable onPress={() => {navigation.navigate("Send")}} style={styles.iconProductHome}>
+          <MaterialCommunityIcons name="bank-transfer-out" size={40} color="black" style={{
+            backgroundColor:"#90EE90", padding:5
+          }}/>
+        <Text padding={5} paddingVertical={20} fontSize={20} color="black">Wyślij</Text>
+      </Pressable>
+      </View>
+      <View>
+      <Pressable onPress={() => {navigation.navigate("Historia")}} style={styles.iconProductHome}>
+      <MaterialCommunityIcons name="bank-transfer-in" size={40} color="black" style={{
+            backgroundColor:"#90EE90", padding:5
+          }}/>
+        <Text padding={5} paddingVertical={20} fontSize={20} color="black">Historia</Text>
+      </Pressable>
+      </View>
+      <View>
+      <Pressable onPress={() => {navigation.navigate("Transfer")}} style={styles.iconProductHome}>
+      <Octicons name="arrow-switch" size={40} color="black" style={{
+            backgroundColor:"#90EE90", padding:5
+          }}/>
+        <Text padding={5} fontSize={20} color="black">Przelew Krajowy</Text>
+      </Pressable>
+      </View>
+          </View>
+          
+      <Text style={{
+            paddingTop:10,
+            fontWeight: "bold",
+            fontSize: 22,
+            marginLeft: 10,
+            color: "#000",
+      }}>Ostatnie Transakcje</Text>
+        <LastTransaction navigation={navigation}/>
+    </ScrollView>
   );
 }

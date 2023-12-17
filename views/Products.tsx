@@ -33,7 +33,7 @@ export default function Products({ navigation }: any) {
       <MaterialCommunityIcons name="bank-transfer-in" size={40} color="black" style={{
             backgroundColor:"#90EE90", padding:5
           }}/>
-        <Text padding={5} paddingVertical={20} fontSize={20} color="black">Historia</Text>
+        <Text padding={5} paddingVertical={20} fontSize={20} color="black" onPress={() => {navigation.navigate("Historia")}} >Historia</Text>
       </Pressable>
       <Pressable onPress={() => {navigation.navigate("Transfer")}} style={styles.iconProduct}>
       <Octicons name="arrow-switch" size={40} color="black" style={{

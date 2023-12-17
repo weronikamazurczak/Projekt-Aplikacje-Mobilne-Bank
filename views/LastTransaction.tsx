@@ -7,7 +7,7 @@ interface TransactionListI{
     amount:number
     typePay:string
 }
-export const LastTransaction = () => {
+export const LastTransaction = ({ navigation }: any) => {
 
     const TransactionElement = (arrayTransaction: TransactionListI[], dateTime: string) => {
         return arrayTransaction.map((item, index) => (
@@ -45,18 +45,8 @@ export const LastTransaction = () => {
 ]
     
     return( 
-        <ScrollView marginBottom={30}>
-        <Pressable onPress={() => {}} style={styles.arrow}>
-        <AntDesign name="arrowleft" size={50} color="black" />
-      </Pressable>
+        <View marginBottom={30}>
 
-      <Text style={{
-            paddingTop:10,
-            fontWeight: "bold",
-            fontSize: 32,
-            marginLeft: 10,
-            color: "#000",
-      }}>Ostatnie Transakcje</Text>
       
                 {transaction.map((item,index)=>{
                    return <View key={index}><Text style={{ fontWeight: 'bold', fontSize: 18, marginTop: 20, backgroundColor:"#cccccc",padding:5, textAlign:"center" }}>{item.dateTime}</Text>
@@ -64,7 +54,7 @@ export const LastTransaction = () => {
                             </View>
                    
                 })}
-        </ScrollView>
+        </View>
         )
        
     

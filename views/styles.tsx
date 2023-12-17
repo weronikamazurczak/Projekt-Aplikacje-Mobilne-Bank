@@ -176,8 +176,8 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   main: {
-    flex: 1,
-    marginTop: "10%",
+ 
+    marginTop: "0%",
   },
   awatar: {
     height: 50,
@@ -189,13 +189,14 @@ const styles = StyleSheet.create({
     marginLeft: "81%",
   },
   card: {
-    flex: 1,
+
     width: 340,
     height: 180,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    marginBottom: "70%",
+    marginTop:50
+    
   },
   login:{
     flex: 1,
@@ -454,6 +455,13 @@ const styles = StyleSheet.create({
     marginBottom:30,
     flexDirection: 'row',
     gap:25
+  },
+  iconProductHome:{
+    width: 90,
+    height: 100,
+    marginLeft: "5%",
+    marginBottom:30,
+    gap:5
   }
  
 });

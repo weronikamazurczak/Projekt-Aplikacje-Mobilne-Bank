@@ -12,7 +12,6 @@ import { AddCard } from "./AddCard";
 import HomeScreen from "./HomeScreen";
 import Products from "./Products";
 import Profil from "./Profil";
-import Historia from "./Historia";
 import FaceVerification from "./FaceVerification";
 import FingerVerification from "./FingerVerification";
 import SuccessfulVerification from "./SuccessfulVerification";
@@ -25,6 +24,7 @@ import Transfer from "./Transfer";
 import TransferCompleted from "./TransferCompleted";
 import Send from "./Send";
 import Send2 from "./Send2";
+import { Historia } from "./Historia";
 
 
 const Stack = createNativeStackNavigator();
@@ -115,6 +115,7 @@ export default function App() {
           <Stack.Screen name="TransferCompleted" component={TransferCompleted} />
           <Stack.Screen name="Send" component={Send} />
           <Stack.Screen name="Send2" component={Send2} />
+          <Stack.Screen name="Historia"  component={Historia}/>
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>
