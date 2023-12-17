@@ -462,7 +462,41 @@ const styles = StyleSheet.create({
     marginLeft: "5%",
     marginBottom:30,
     gap:5
-  }
+  },
+  
+  verify: {
+    flex: 1,
+  },
+  verifyImg: {
+    marginTop: "25%",
+    width: 150,
+    height: 150,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+  },
+  accountCreate: {
+    fontWeight: "bold",
+    fontSize: 32,
+    marginTop: "7%",
+    paddingTop: 9,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    color: "#000",
+  },
+  additionInformation: {
+    width: 310,
+    height: 50,
+    fontSize: 14,
+    color: "#C1C1C1",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    padding: 3,
+    marginTop: "2%",
+    marginBottom: "2%",
+  },
  
 });
 

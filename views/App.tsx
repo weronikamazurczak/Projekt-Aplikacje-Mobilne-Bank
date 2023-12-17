@@ -26,7 +26,6 @@ import Send from "./Send";
 import Send2 from "./Send2";
 import { Historia } from "./Historia";
 
-
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +35,7 @@ function TabNavigator() {
       initialRouteName="Pulpit"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#5ae4a8',
+        tabBarActiveTintColor: "#5ae4a8",
         tabBarInactiveTintColor: "black",
       }}
     >
@@ -45,7 +44,7 @@ function TabNavigator() {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <Ionicons name="ios-home-outline" size={24} color = {color} />
+            <Ionicons name="ios-home-outline" size={24} color={color} />
           ),
         }}
       />
@@ -54,7 +53,7 @@ function TabNavigator() {
         component={Historia}
         options={{
           tabBarIcon: ({ color }) => (
-            <AntDesign name="calendar" size={24} color = {color} />
+            <AntDesign name="calendar" size={24} color={color} />
           ),
         }}
       />
@@ -66,7 +65,7 @@ function TabNavigator() {
             <MaterialCommunityIcons
               name="wallet-outline"
               size={24}
-              color = {color}
+              color={color}
             />
           ),
         }}
@@ -76,7 +75,7 @@ function TabNavigator() {
         component={Profil}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="user" size={24} color = {color} />
+            <FontAwesome5 name="user" size={24} color={color} />
           ),
         }}
       />
@@ -90,7 +89,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
-          initialRouteName="Home"
+          initialRouteName="SplashScreen"
         >
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="OnboardScreens" component={OnboardScreens} />
@@ -109,13 +108,16 @@ export default function App() {
           />
           <Stack.Screen name="Notification" component={Notification} />
 
-          <Stack.Screen name="Home" component={TabNavigator}/>
-          <Stack.Screen name="Products" component={Products}/>
+          <Stack.Screen name="Home" component={TabNavigator} />
+          <Stack.Screen name="Products" component={Products} />
           <Stack.Screen name="Transfer" component={Transfer} />
-          <Stack.Screen name="TransferCompleted" component={TransferCompleted} />
+          <Stack.Screen
+            name="TransferCompleted"
+            component={TransferCompleted}
+          />
           <Stack.Screen name="Send" component={Send} />
           <Stack.Screen name="Send2" component={Send2} />
-          <Stack.Screen name="Historia"  component={Historia}/>
+          <Stack.Screen name="Historia" component={Historia} />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>
