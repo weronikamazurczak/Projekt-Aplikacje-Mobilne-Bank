@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     height: 250,
     width: 250,
     alignSelf: "center",
-    marginTop: '30%',
+    marginTop: '1%',
   },
   rejest:{
     flexDirection: 'row',

@@ -72,7 +72,7 @@ export default function Register({ navigation }: any) {
               }}
             />
           </Input>
-          <FormControlError>
+          <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
             <FormControlErrorText>
               {" "}
@@ -104,7 +104,7 @@ export default function Register({ navigation }: any) {
               }}
             />
           </Input>
-          <FormControlError>
+          <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
             <FormControlErrorText>
               {" "}
@@ -136,7 +136,7 @@ export default function Register({ navigation }: any) {
               }}
             />
           </Input>
-          <FormControlError>
+          <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
             <FormControlErrorText>
               {" "}
@@ -168,7 +168,7 @@ export default function Register({ navigation }: any) {
               }}
             />
           </Input>
-          <FormControlError>
+          <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
             <FormControlErrorText>
               {" "}

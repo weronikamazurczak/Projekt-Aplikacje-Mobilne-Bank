@@ -10,6 +10,7 @@ import {
   FormControl,
   FormControlError,
   FormControlErrorIcon,
+  FormControlErrorText,
   FormControlLabel,
   FormControlLabelText,
   Input,
@@ -59,6 +60,10 @@ export const AddCard = ({ navigation }: any) => {
   const [cardDate, setCardDate] = useState("");
   const [cvv, setCvv] = useState("");
 
+  const [czyNiePrawidlowyNumerKarty, ustawCzyNiePrawidlowyNumerKarty] = useState(false);
+  const [czyNiePrawidlowaDataWygasniecia, ustawCzyNiePrawidlowaDataWygasniecia] = useState(false);
+  const [czyNiePrawidlowyNumerCVC, ustawCzyNiePrawidlowyNumerCVC] = useState(false);
+
   const route = useRoute();
   const {name} = route.params as DaneRejestracja;
   const {email} =route.params as DaneRejestracja;
@@ -75,7 +80,7 @@ export const AddCard = ({ navigation }: any) => {
         <FormControl
           size="sm"
           isDisabled={false}
-          isInvalid={false}
+          isInvalid={czyNiePrawidlowyNumerKarty}
           isReadOnly={false}
           isRequired={true}
         >
@@ -93,15 +98,19 @@ export const AddCard = ({ navigation }: any) => {
               onChangeText = {(cardNumber) => {setCardNumber(cardNumber)}}
             />
           </Input>
-          <FormControlError>
+          <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
+            <FormControlErrorText>
+              {" "}
+              Wprowadzono będny numer karty{" "}
+            </FormControlErrorText>
           </FormControlError>
         </FormControl>
 
         <FormControl
           size="sm"
           isDisabled={false}
-          isInvalid={false}
+          isInvalid={czyNiePrawidlowaDataWygasniecia}
           isReadOnly={false}
           isRequired={true}
         >
@@ -119,15 +128,19 @@ export const AddCard = ({ navigation }: any) => {
             onChangeText = {(cardDate) => {setCardDate(cardDate)}}
              />
           </Input>
-          <FormControlError>
+          <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
+            <FormControlErrorText>
+              {" "}
+              Wprowadzone błędną date{" "}
+            </FormControlErrorText>
           </FormControlError>
         </FormControl>
 
         <FormControl
           size="sm"
           isDisabled={false}
-          isInvalid={false}
+          isInvalid={czyNiePrawidlowyNumerCVC}
           isReadOnly={false}
           isRequired={true}
         >
@@ -145,8 +158,12 @@ export const AddCard = ({ navigation }: any) => {
             onChangeText={(cvv) => {setCvv(cvv)}}
              />
           </Input>
-          <FormControlError>
+          <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
+            <FormControlErrorText>
+              {" "}
+              Wprowadzony numer kodu CVC{" "}
+            </FormControlErrorText>
           </FormControlError>
         </FormControl>
       </View>
@@ -171,7 +188,22 @@ export const AddCard = ({ navigation }: any) => {
 
 
       <Button
-        onPress={() => { WyslijDoBazy( {name: name, email:email, password:password, confirmPassword:confirmPassword, cardNumber:cardNumber, cardDate:cardDate, cvv:cvv} ); navigation.navigate("FaceVerification")}}
+        onPress={() => {
+          if(cardNumber.replace(/\s/g, '').length !== 16){
+            ustawCzyNiePrawidlowyNumerKarty(true);
+          }else{ustawCzyNiePrawidlowyNumerKarty(false);}
+          if(!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(cardDate)){
+            ustawCzyNiePrawidlowaDataWygasniecia(true);
+          }else{ustawCzyNiePrawidlowaDataWygasniecia(false);}
+          if(cvv.length !== 3){
+            ustawCzyNiePrawidlowyNumerCVC(true);
+          }else{ustawCzyNiePrawidlowyNumerCVC(false);}
+
+          if (!czyNiePrawidlowyNumerKarty && !czyNiePrawidlowaDataWygasniecia && !czyNiePrawidlowyNumerCVC) {
+            WyslijDoBazy({name: name, email:email, password:password, confirmPassword:confirmPassword, cardNumber:cardNumber, cardDate:cardDate, cvv:cvv});
+            navigation.navigate("FaceVerification");
+          }}}
+
         style={styles.addCardNaxtButton}
         size="lg"
         variant="solid"

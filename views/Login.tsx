@@ -62,7 +62,7 @@ export default function Login({ navigation }: any) {
             }}
           />
         </Input>
-        <FormControlError>
+        <FormControlError style={styles.label}>
           <FormControlErrorIcon as={AlertCircleIcon} />
           <FormControlErrorText>Wprowadzono błędny email</FormControlErrorText>
         </FormControlError>
@@ -91,7 +91,7 @@ export default function Login({ navigation }: any) {
             }}
           />
         </Input>
-        <FormControlError>
+        <FormControlError style={styles.label}>
           <FormControlErrorIcon as={AlertCircleIcon} />
           <FormControlErrorText>Wprowadzono błędne hasło</FormControlErrorText>
         </FormControlError>
