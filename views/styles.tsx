@@ -93,14 +93,13 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
     marginLeft: "5%",
   },
-  arrowProduct:{
+  arrowProduct: {
     width: 40,
     height: 40,
     marginTop: "15%",
     marginLeft: "5%",
-    marginBottom:10,
-  }
-  ,
+    marginBottom: 10,
+  },
   bottomTitle: {
     width: 310,
     height: 50,
@@ -176,7 +175,6 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   main: {
- 
     marginTop: "0%",
   },
   awatar: {
@@ -189,27 +187,25 @@ const styles = StyleSheet.create({
     marginLeft: "81%",
   },
   card: {
-
     width: 340,
     height: 180,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    marginTop:50
-    
+    marginTop: 50,
   },
-  login:{
+  login: {
     flex: 1,
   },
-  logo:{
+  logo: {
     height: 250,
     width: 250,
     alignSelf: "center",
-    marginTop: '1%',
+    marginTop: "1%",
   },
-  rejest:{
-    flexDirection: 'row',
-    marginLeft: '25%',
+  rejest: {
+    flexDirection: "row",
+    marginLeft: "25%",
   },
   profil: {
     flex: 1,
@@ -222,25 +218,25 @@ const styles = StyleSheet.create({
     marginLeft: "15%",
     color: "#000",
   },
-  nameProfil:{
+  nameProfil: {
     fontSize: 26,
     color: "#000",
     fontWeight: "bold",
     alignSelf: "center",
     padding: 2,
-    marginTop: '3%',
+    marginTop: "3%",
   },
   profilAwatar: {
     height: 80,
     width: 80,
     alignSelf: "center",
-    marginTop: '3%',
+    marginTop: "3%",
   },
-  mailProfil:{
+  mailProfil: {
     fontSize: 14,
     color: "#AEAEAE",
     alignSelf: "center",
-    marginBottom: '15%',
+    marginBottom: "15%",
   },
   transfer: {
     flex: 1,
@@ -267,7 +263,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     columnGap: 10,
   },
-  textTransfer:{
+  textTransfer: {
     color: "#AEAEAE",
     marginLeft: "80%",
     marginTop: -40,
@@ -276,7 +272,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
     alignSelf: "center",
-    marginTop: '30%',
+    marginTop: "30%",
   },
   titleTransferCompleted: {
     width: 311,
@@ -301,7 +297,7 @@ const styles = StyleSheet.create({
     color: "#000",
     alignSelf: "center",
   },
-  selectPerson:{
+  selectPerson: {
     width: 220,
     height: 70,
     fontWeight: "bold",
@@ -321,7 +317,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     columnGap: 10,
   },
-  lastSend:{
+  lastSend: {
     width: 311,
     height: 40,
     fontWeight: "bold",
@@ -331,12 +327,12 @@ const styles = StyleSheet.create({
     color: "#000",
     marginTop: "8%",
   },
-  avatarSend:{
+  avatarSend: {
     height: 66,
     width: 66,
     marginLeft: "7%",
   },
-  profilAwatar2:{
+  profilAwatar2: {
     height: 80,
     width: 80,
     alignSelf: "center",
@@ -370,22 +366,22 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
     elevation: 4,
   },
-  send2ButtonTextAmount:{
-    color: "#2F6B5B", 
+  send2ButtonTextAmount: {
+    color: "#2F6B5B",
     fontSize: 28,
-    fontWeight: "bold", 
+    fontWeight: "bold",
   },
-  textSend2Amount:{
+  textSend2Amount: {
     marginTop: -95,
     marginLeft: "10%",
     fontSize: 18,
-    fontWeight: "bold", 
+    fontWeight: "bold",
   },
-  send2Availablefunds:{
+  send2Availablefunds: {
     marginTop: "11.5%",
     alignSelf: "center",
     fontSize: 15,
-    fontWeight: "bold", 
+    fontWeight: "bold",
   },
   send2NextButton: {
     width: 349,
@@ -405,14 +401,14 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
     elevation: 4,
   },
-  nameSend2:{
+  nameSend2: {
     fontSize: 26,
     color: "#000",
     fontWeight: "bold",
     alignSelf: "center",
     padding: 2,
   },
-  mailSend2:{
+  mailSend2: {
     fontSize: 14,
     color: "#AEAEAE",
     alignSelf: "center",
@@ -423,7 +419,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginLeft: "7%",
     color: "#AEAEAE",
-    
   },
   boxSend2: {
     marginLeft: "6%",
@@ -436,36 +431,36 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     elevation: 0.1,
   },
-  keyboard:{
+  keyboard: {
     marginBottom: -50,
   },
-  namePerson:{
+  namePerson: {
     height: 40,
     width: 200,
     fontWeight: "bold",
     fontSize: 26,
     color: "#000",
-    marginTop: '6%',
+    marginTop: "6%",
     marginLeft: "5%",
   },
-  iconProduct:{
+  iconProduct: {
     width: 110,
     height: 60,
     marginLeft: "5%",
-    marginBottom:30,
-    flexDirection: 'row',
-    gap:25
+    marginBottom: 30,
+    flexDirection: "row",
+    gap: 25,
   },
-  iconProductHome:{
+  iconProductHome: {
     width: 90,
     height: 100,
     marginLeft: "5%",
-    marginBottom:30,
-    gap:5,
-    justifyContent: 'center', 
-    alignItems: 'center' 
+    marginBottom: 30,
+    gap: 5,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  
+
   verify: {
     flex: 1,
   },
@@ -499,7 +494,6 @@ const styles = StyleSheet.create({
     marginTop: "2%",
     marginBottom: "2%",
   },
- 
 });
 
 export default styles;

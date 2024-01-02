@@ -98,15 +98,14 @@ export default function Login({ navigation }: any) {
       </FormControl>
 
       <Button
-        onPress={() => { 
+        onPress={() => {
           if (!email.includes("@")) {
-            ustawCzyNiePrawidloweEmail(true)
+            ustawCzyNiePrawidloweEmail(true);
           }
-          if (password.length < 8){
-            ustawCzyNiePrawidloweHaslo(true)
-          }
-          else if(email.includes('@') && password.length > 8) {
-            navigation.navigate("Home")
+          if (password.length < 8) {
+            ustawCzyNiePrawidloweHaslo(true);
+          } else if (email.includes("@") && password.length > 8) {
+            navigation.navigate("Home");
           }
         }}
         style={styles.registerNextButton}

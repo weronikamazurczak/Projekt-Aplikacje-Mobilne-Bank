@@ -39,7 +39,12 @@ export default function Register({ navigation }: any) {
 
   return (
     <ScrollView style={styles.register}>
-      <Pressable onPress={() => {navigation.navigate("Login")}} style={styles.arrow}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("Login");
+        }}
+        style={styles.arrow}
+      >
         <AntDesign name="arrowleft" size={50} color="black" />
       </Pressable>
 
@@ -178,25 +183,32 @@ export default function Register({ navigation }: any) {
         </FormControl>
       </View>
 
-   
-
       <Button
         onPress={() => {
           if (!name || name.length < 3 || !/^[a-zA-Z]+ [a-zA-Z]+$/.test(name)) {
             ustawCzyNiePrawidloweImieNazwisko(true);
-          }else{ustawCzyNiePrawidloweImieNazwisko(false);}
+          } else {
+            ustawCzyNiePrawidloweImieNazwisko(false);
+          }
           if (!email.includes("@")) {
             ustawCzyNiePrawidloweEmail(true);
-          }else{ustawCzyNiePrawidloweEmail(false);}
+          } else {
+            ustawCzyNiePrawidloweEmail(false);
+          }
           if (password.length < 8) {
             ustawCzyNiePrawidloweHaslo(true);
-          }else{ustawCzyNiePrawidloweHaslo(false);}
+          } else {
+            ustawCzyNiePrawidloweHaslo(false);
+          }
           if (confirmPassword.length < 8 || password !== confirmPassword) {
             ustawCzyNiePrawidlowoPowtorzoneHaslo(true);
-          } else if(confirmPassword.length > 8 && password === confirmPassword) {
+          } else if (
+            confirmPassword.length > 8 &&
+            password === confirmPassword
+          ) {
             ustawCzyNiePrawidlowoPowtorzoneHaslo(false);
           }
-            if (
+          if (
             name &&
             name.length > 3 &&
             /^[a-zA-Z]+ [a-zA-Z]+$/.test(name) &&
@@ -222,6 +234,6 @@ export default function Register({ navigation }: any) {
       >
         <ButtonText style={{ color: "#000" }}>Dalej</ButtonText>
       </Button>
-    </ScrollView >
+    </ScrollView>
   );
 }

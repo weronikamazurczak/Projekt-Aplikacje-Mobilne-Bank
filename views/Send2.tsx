@@ -1,34 +1,44 @@
-import {  Text, Pressable } from 'react-native'
-import React, { useState }from 'react'
-import styles from './styles'
+import { Text, Pressable } from "react-native";
+import React, { useState } from "react";
+import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
-import { View, Button, ButtonText, Avatar, AvatarImage, FormControl, FormControlLabel, FormControlLabelText, Input, InputField} from "@gluestack-ui/themed";
+import {
+  View,
+  Button,
+  ButtonText,
+  Avatar,
+  AvatarImage,
+  FormControl,
+  FormControlLabel,
+  FormControlLabelText,
+  Input,
+  InputField,
+} from "@gluestack-ui/themed";
 import ModernKeyboard from "react-native-modern-keyboard";
 
-
 export default function Send2({ navigation }: any) {
-    const [input, setInput] = useState<string>();
-    return (
-        
-      <View style={styles.send}>
+  const [input, setInput] = useState<string>();
+  return (
+    <View style={styles.send}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("Send");
+        }}
+        style={styles.arrow}
+      >
+        <AntDesign name="arrowleft" size={50} color="black" />
+      </Pressable>
 
-        <Pressable onPress={() => {navigation.navigate("Send")}} style={styles.arrow}>
-          <AntDesign name="arrowleft" size={50} color="black" />
-        </Pressable>
-  
-        <Text style={styles.titleSend2}>Wyślij</Text>
+      <Text style={styles.titleSend2}>Wyślij</Text>
 
-        <Avatar size = "lg" style={styles.profilAwatar2}>
-          <AvatarImage 
-            source={require("../assets/awatar2.png")}
-            alt="odbiorca"
-            />
+      <Avatar size="lg" style={styles.profilAwatar2}>
+        <AvatarImage source={require("../assets/awatar2.png")} alt="odbiorca" />
       </Avatar>
 
       <Text style={styles.nameSend2}>Michał</Text>
       <Text style={styles.mailSend2}>michal4673@gmail.com</Text>
 
-        <Button
+      <Button
         style={styles.send2Amount}
         size="lg"
         variant="solid"
@@ -36,7 +46,9 @@ export default function Send2({ navigation }: any) {
         isDisabled={false}
         isFocusVisible={false}
       >
-        <ButtonText style={styles.send2ButtonTextAmount}>{input} PLN</ButtonText>
+        <ButtonText style={styles.send2ButtonTextAmount}>
+          {input} PLN
+        </ButtonText>
       </Button>
 
       <Text style={styles.textSend2Amount}>Podaj kwote</Text>
@@ -44,7 +56,9 @@ export default function Send2({ navigation }: any) {
       <Text style={styles.send2Availablefunds}>Dostępne środki: 300 PLN</Text>
 
       <Button
-        onPress={() => {navigation.navigate("TransferCompleted")}}
+        onPress={() => {
+          navigation.navigate("TransferCompleted");
+        }}
         style={styles.send2NextButton}
         size="lg"
         variant="solid"
@@ -55,13 +69,13 @@ export default function Send2({ navigation }: any) {
         <ButtonText style={{ color: "#000" }}>Wyślij</ButtonText>
       </Button>
 
-        <ModernKeyboard style={styles.keyboard} size={55} 
-            onInputChange={(value: string) => {
-            setInput(value);
-            }}
-        />
- 
-        </View>
-        
-    )
+      <ModernKeyboard
+        style={styles.keyboard}
+        size={55}
+        onInputChange={(value: string) => {
+          setInput(value);
+        }}
+      />
+    </View>
+  );
 }
