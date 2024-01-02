@@ -461,7 +461,9 @@ const styles = StyleSheet.create({
     height: 100,
     marginLeft: "5%",
     marginBottom:30,
-    gap:5
+    gap:5,
+    justifyContent: 'center', 
+    alignItems: 'center' 
   },
   
   verify: {

@@ -32,43 +32,47 @@ interface DaneRejestracja {
   confirmPassword?: string | undefined;
 }
 
-
-async function WyslijDoBazy(params:any) {
-  const firebaseLinkDoBazy = 'https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/';
-  const sciezkaDoBazy = '/uzytkownicy.json';
-  const ApiKey = 'AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24';
+async function WyslijDoBazy(params: any) {
+  const firebaseLinkDoBazy =
+    "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
+  const sciezkaDoBazy = "/uzytkownicy.json";
+  const ApiKey = "AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24";
   const LinkZadania = `${firebaseLinkDoBazy}${sciezkaDoBazy}?key=${ApiKey}`;
-  try{
+  try {
     const response = await fetch(LinkZadania, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(params)
+      body: JSON.stringify(params),
     });
-    if(response.ok) {
-      console.log('rejestracja ok');
+    if (response.ok) {
+      console.log("rejestracja ok");
+    }
+  } catch (error) {
+    console.log(error);
   }
-} catch (error) {
-  console.log(error);
 }
-}
-
 
 export const AddCard = ({ navigation }: any) => {
   const [cardNumber, setCardNumber] = useState("");
   const [cardDate, setCardDate] = useState("");
   const [cvv, setCvv] = useState("");
 
-  const [czyNiePrawidlowyNumerKarty, ustawCzyNiePrawidlowyNumerKarty] = useState(false);
-  const [czyNiePrawidlowaDataWygasniecia, ustawCzyNiePrawidlowaDataWygasniecia] = useState(false);
-  const [czyNiePrawidlowyNumerCVC, ustawCzyNiePrawidlowyNumerCVC] = useState(false);
+  const [czyNiePrawidlowyNumerKarty, ustawCzyNiePrawidlowyNumerKarty] =
+    useState(false);
+  const [
+    czyNiePrawidlowaDataWygasniecia,
+    ustawCzyNiePrawidlowaDataWygasniecia,
+  ] = useState(false);
+  const [czyNiePrawidlowyNumerCVC, ustawCzyNiePrawidlowyNumerCVC] =
+    useState(false);
 
   const route = useRoute();
-  const {name} = route.params as DaneRejestracja;
-  const {email} =route.params as DaneRejestracja;
-  const {password} = route.params as DaneRejestracja;
-  const {confirmPassword} = route.params as DaneRejestracja;
+  const { name } = route.params as DaneRejestracja;
+  const { email } = route.params as DaneRejestracja;
+  const { password } = route.params as DaneRejestracja;
+  const { confirmPassword } = route.params as DaneRejestracja;
 
   return (
     <View style={styles.register}>
@@ -95,7 +99,9 @@ export const AddCard = ({ navigation }: any) => {
               type="text"
               placeholder="1234 1234 1234 1234"
               fontSize={12}
-              onChangeText = {(cardNumber) => {setCardNumber(cardNumber)}}
+              onChangeText={(cardNumber) => {
+                setCardNumber(cardNumber);
+              }}
             />
           </Input>
           <FormControlError style={styles.label}>
@@ -121,12 +127,14 @@ export const AddCard = ({ navigation }: any) => {
           </FormControlLabel>
           <Input style={styles.box}>
             <AntDesign name="calendar" size={22} color="black" />
-            <InputField 
-            type="text" 
-            placeholder="MM/YY" 
-            fontSize={12}
-            onChangeText = {(cardDate) => {setCardDate(cardDate)}}
-             />
+            <InputField
+              type="text"
+              placeholder="MM/YY"
+              fontSize={12}
+              onChangeText={(cardDate) => {
+                setCardDate(cardDate);
+              }}
+            />
           </Input>
           <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
@@ -151,12 +159,14 @@ export const AddCard = ({ navigation }: any) => {
           </FormControlLabel>
           <Input style={styles.box}>
             <MaterialIcons name="lock-outline" size={22} color="black" />
-            <InputField 
-            type="text" 
-            placeholder="123" 
-            fontSize={12}
-            onChangeText={(cvv) => {setCvv(cvv)}}
-             />
+            <InputField
+              type="text"
+              placeholder="123"
+              fontSize={12}
+              onChangeText={(cvv) => {
+                setCvv(cvv);
+              }}
+            />
           </Input>
           <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
@@ -186,24 +196,41 @@ export const AddCard = ({ navigation }: any) => {
         </CheckboxLabel>
       </Checkbox>
 
-
       <Button
         onPress={() => {
-          if(cardNumber.replace(/\s/g, '').length !== 16){
+          if (cardNumber.replace(/\s/g, "").length !== 16) {
             ustawCzyNiePrawidlowyNumerKarty(true);
-          }else{ustawCzyNiePrawidlowyNumerKarty(false);}
-          if(!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(cardDate)){
+          } else {
+            ustawCzyNiePrawidlowyNumerKarty(false);
+          }
+          if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(cardDate)) {
             ustawCzyNiePrawidlowaDataWygasniecia(true);
-          }else{ustawCzyNiePrawidlowaDataWygasniecia(false);}
-          if(cvv.length !== 3){
+          } else {
+            ustawCzyNiePrawidlowaDataWygasniecia(false);
+          }
+          if (cvv.length !== 3) {
             ustawCzyNiePrawidlowyNumerCVC(true);
-          }else{ustawCzyNiePrawidlowyNumerCVC(false);}
+          } else {
+            ustawCzyNiePrawidlowyNumerCVC(false);
+          }
 
-          if (!czyNiePrawidlowyNumerKarty && !czyNiePrawidlowaDataWygasniecia && !czyNiePrawidlowyNumerCVC) {
-            WyslijDoBazy({name: name, email:email, password:password, confirmPassword:confirmPassword, cardNumber:cardNumber, cardDate:cardDate, cvv:cvv});
+          if (
+            !czyNiePrawidlowyNumerKarty &&
+            !czyNiePrawidlowaDataWygasniecia &&
+            !czyNiePrawidlowyNumerCVC
+          ) {
+            WyslijDoBazy({
+              name: name,
+              email: email,
+              password: password,
+              confirmPassword: confirmPassword,
+              cardNumber: cardNumber,
+              cardDate: cardDate,
+              cvv: cvv,
+            });
             navigation.navigate("FaceVerification");
-          }}}
-
+          }
+        }}
         style={styles.addCardNaxtButton}
         size="lg"
         variant="solid"
@@ -219,8 +246,7 @@ export const AddCard = ({ navigation }: any) => {
           justifyContent: "center",
           flexDirection: "row",
         }}
-      >
-      </View>
+      ></View>
     </View>
   );
 };
