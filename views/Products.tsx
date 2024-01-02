@@ -45,8 +45,9 @@ export default function Products({ navigation }: any) {
             size={40}
             color="black"
             style={{
-              backgroundColor: "#90EE90",
-              padding: 5,
+              backgroundColor: "#5AE4A8",
+                padding: 10,
+                borderRadius: 10,
             }}
           />
           <Text padding={5} paddingVertical={20} fontSize={20} color="black">
@@ -59,8 +60,9 @@ export default function Products({ navigation }: any) {
             size={40}
             color="black"
             style={{
-              backgroundColor: "#90EE90",
-              padding: 5,
+              backgroundColor: "#5AE4A8",
+                padding: 10,
+                borderRadius: 10,
             }}
           />
           <Text
@@ -81,15 +83,16 @@ export default function Products({ navigation }: any) {
           }}
           style={styles.iconProduct}
         >
-          <Octicons
-            name="arrow-switch"
-            size={40}
-            color="black"
-            style={{
-              backgroundColor: "#90EE90",
-              padding: 10,
-            }}
-          />
+          <MaterialCommunityIcons
+              name="bank-transfer-in"
+              size={40}
+              color="black"
+              style={{
+                backgroundColor: "#5AE4A8",
+                padding: 10,
+                borderRadius: 10,
+              }}
+            />
           <Text padding={5} fontSize={20} color="black">
             Przelew Krajowy
           </Text>

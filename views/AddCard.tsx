@@ -210,7 +210,7 @@ export const AddCard = ({ navigation }: any) => {
           }
           if (cvv.length !== 3) {
             ustawCzyNiePrawidlowyNumerCVC(true);
-          } else {
+          } else{
             ustawCzyNiePrawidlowyNumerCVC(false);
           }
 
@@ -218,7 +218,7 @@ export const AddCard = ({ navigation }: any) => {
             !czyNiePrawidlowyNumerKarty &&
             !czyNiePrawidlowaDataWygasniecia &&
             !czyNiePrawidlowyNumerCVC
-          ) {
+          ){}else {
             WyslijDoBazy({
               name: name,
               email: email,
