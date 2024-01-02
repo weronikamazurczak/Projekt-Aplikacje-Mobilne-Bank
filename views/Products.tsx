@@ -7,7 +7,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Products({ navigation }: any) {
   return (
-    <View>
+    <View style={styles.ladowanie}>
       <Pressable
         onPress={() => {
           navigation.navigate("Home");

@@ -10,7 +10,7 @@ interface TransactionListI {
 }
 export const Historia = ({ navigation }: any) => {
   return (
-    <ScrollView marginBottom={30}>
+    <ScrollView marginBottom={30} style={styles.ladowanie}>
       <Pressable
         onPress={() => {
           navigation.navigate("Products");

@@ -105,6 +105,7 @@ export default function Login({ navigation }: any) {
           if (password.length < 8) {
             ustawCzyNiePrawidloweHaslo(true);
           } else if (email.includes("@") && password.length > 8) {
+            // jesli uzytkownik istnieje w bazie
             navigation.navigate("Home");
           }
         }}

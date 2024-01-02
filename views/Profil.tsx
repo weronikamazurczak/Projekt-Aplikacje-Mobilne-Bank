@@ -3,20 +3,11 @@ import {
   Avatar,
   AvatarImage,
   ButtonText,
-  Center,
   FormControl,
-  FormControlError,
-  FormControlErrorIcon,
-  FormControlErrorText,
-  FormControlHelper,
-  FormControlHelperText,
   FormControlLabel,
   FormControlLabelText,
-  HStack,
-  Heading,
   Input,
   InputField,
-  VStack,
   Button,
 } from "@gluestack-ui/themed";
 import styles from "./styles";
@@ -24,7 +15,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-
 export default function Profil({ navigation }: any) {
   const [nameFromDatabase, setNameFromDatabase] = useState("");
   const [emailFromDatabase, setEmailFromDatabase] = useState("");
@@ -102,14 +92,7 @@ export default function Profil({ navigation }: any) {
 
       <Text style={styles.titleProfil}>Profil</Text>
 
-      <Avatar size="lg" style={styles.profilAwatar}>
-        <AvatarImage
-          source={{
-            uri: "https://i.imgur.com/sdc68pF.png",
-          }}
-          alt="zdjecie"
-        />
-      </Avatar>
+      <AvatarComponent />
 
       <Text style={styles.nameProfil}>{nameFromDatabase}</Text>
       <Text style={styles.mailProfil}>{emailFromDatabase}</Text>
@@ -186,3 +169,16 @@ export default function Profil({ navigation }: any) {
     </View>
   );
 }
+
+const AvatarComponent = () => {
+  return (
+    <Avatar size="lg" style={styles.profilAwatar}>
+      <AvatarImage
+        source={{
+          uri: "https://i.imgur.com/sdc68pF.png",
+        }}
+        alt="zdjecie"
+      />
+    </Avatar>
+  );
+};

@@ -4,7 +4,7 @@ import styles from "./styles";
 
 export default function FaceVerification({ navigation }: any) {
   return (
-    <View>
+    <View style={styles.register}>
       <Text>FaceVerification</Text>
       <Button
         onPress={() => navigation.navigate("FingerVerification")}

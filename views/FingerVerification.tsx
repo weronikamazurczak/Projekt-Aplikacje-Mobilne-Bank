@@ -4,7 +4,7 @@ import styles from "./styles";
 
 export default function FingerVerification({ navigation }: any) {
   return (
-    <View>
+    <View style={styles.register}>
       <Text>FingerVerification</Text>
       <Button
         onPress={() => navigation.navigate("SuccessfulVerification")}

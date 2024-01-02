@@ -30,6 +30,7 @@ export default function Notification({ navigation }: any) {
           marginHorizontal: 15,
           borderBottomColor: "gray",
           borderBottomWidth: 1,
+          backgroundColor: '#FAFAFA',
         }}
       >
         <View style={{}}>

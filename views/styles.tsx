@@ -8,6 +8,7 @@ const windowHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
   ladowanie: {
     flex: 1,
+    backgroundColor: '#FAFAFA',
   },
   kropk1: {
     justifyContent: "center",
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
   },
   register: {
     flex: 1,
+    backgroundColor: '#FAFAFA',
   },
   titleRegister: {
     width: 200,
@@ -196,6 +198,7 @@ const styles = StyleSheet.create({
   },
   login: {
     flex: 1,
+    backgroundColor: '#FAFAFA',
   },
   logo: {
     height: 250,
@@ -209,6 +212,7 @@ const styles = StyleSheet.create({
   },
   profil: {
     flex: 1,
+    backgroundColor: '#FAFAFA',
   },
   titleProfil: {
     width: 200,
@@ -463,6 +467,7 @@ const styles = StyleSheet.create({
 
   verify: {
     flex: 1,
+    backgroundColor: '#FAFAFA',
   },
   verifyImg: {
     marginTop: "25%",
