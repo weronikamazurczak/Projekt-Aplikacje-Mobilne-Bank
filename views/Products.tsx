@@ -1,8 +1,7 @@
-import { View, Text, ScrollView, Pressable } from "@gluestack-ui/themed";
+import { View, Text, Pressable } from "@gluestack-ui/themed";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import styles from "./styles";
-import { Octicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Products({ navigation }: any) {
@@ -10,7 +9,7 @@ export default function Products({ navigation }: any) {
     <View style={styles.ladowanie}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("Pulpit");
         }}
         style={styles.arrowProduct}
       >
@@ -36,7 +35,7 @@ export default function Products({ navigation }: any) {
       >
         <Pressable
           onPress={() => {
-            navigation.navigate("Send");
+            navigation.navigate("Send", { screenName: "Produkty" });
           }}
           style={styles.iconProduct}
         >
@@ -46,53 +45,50 @@ export default function Products({ navigation }: any) {
             color="black"
             style={{
               backgroundColor: "#5AE4A8",
-                padding: 10,
-                borderRadius: 10,
+              padding: 10,
+              borderRadius: 10,
             }}
           />
           <Text padding={5} paddingVertical={20} fontSize={20} color="black">
             Wyślij
           </Text>
         </Pressable>
-        <Pressable onPress={() => {}} style={styles.iconProduct}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("Historia", { screenName: "Produkty" });
+          }}
+          style={styles.iconProduct}
+        >
           <MaterialCommunityIcons
             name="bank-transfer-in"
             size={40}
             color="black"
             style={{
               backgroundColor: "#5AE4A8",
-                padding: 10,
-                borderRadius: 10,
+              padding: 10,
+              borderRadius: 10,
             }}
           />
-          <Text
-            padding={5}
-            paddingVertical={20}
-            fontSize={20}
-            color="black"
-            onPress={() => {
-              navigation.navigate("Historia");
-            }}
-          >
+          <Text padding={5} paddingVertical={20} fontSize={20} color="black">
             Historia
           </Text>
         </Pressable>
         <Pressable
           onPress={() => {
-            navigation.navigate("Transfer");
+            navigation.navigate("Transfer", { screenName: "Produkty" });
           }}
           style={styles.iconProduct}
         >
           <MaterialCommunityIcons
-              name="bank-transfer-in"
-              size={40}
-              color="black"
-              style={{
-                backgroundColor: "#5AE4A8",
-                padding: 10,
-                borderRadius: 10,
-              }}
-            />
+            name="bank-transfer-in"
+            size={40}
+            color="black"
+            style={{
+              backgroundColor: "#5AE4A8",
+              padding: 10,
+              borderRadius: 10,
+            }}
+          />
           <Text padding={5} fontSize={20} color="black">
             Przelew Krajowy
           </Text>

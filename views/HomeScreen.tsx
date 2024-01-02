@@ -177,7 +177,7 @@ export default function HomeScreen({ navigation }: any) {
         <View>
           <Pressable
             onPress={() => {
-              navigation.navigate("Send");
+              navigation.navigate("Send", { screenName: "Pulpit" });
             }}
             style={styles.iconProductHome}
           >
@@ -199,7 +199,7 @@ export default function HomeScreen({ navigation }: any) {
         <View>
           <Pressable
             onPress={() => {
-              navigation.navigate("Historia");
+              navigation.navigate("Historia", { screenName: "Pulpit" });
             }}
             style={styles.iconProductHome}
           >
@@ -221,7 +221,7 @@ export default function HomeScreen({ navigation }: any) {
         <View>
           <Pressable
             onPress={() => {
-              navigation.navigate("Transfer");
+              navigation.navigate("Transfer", { screenName: "Pulpit" });
             }}
             style={styles.iconProductHome}
           >

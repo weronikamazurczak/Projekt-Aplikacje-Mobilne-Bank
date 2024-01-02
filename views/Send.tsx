@@ -4,8 +4,6 @@ import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import {
   View,
-  Image,
-  Button,
   Divider,
   ScrollView,
   FormControl,
@@ -16,16 +14,23 @@ import {
   Avatar,
   AvatarImage,
   HStack,
-  Heading,
   VStack,
 } from "@gluestack-ui/themed";
+import { useRoute } from "@react-navigation/native";
+
+interface PrzekazanaNazwa {
+  screenName?: string;
+}
 
 export default function Send({ navigation }: any) {
+  const route = useRoute();
+  const { screenName } = route.params as PrzekazanaNazwa;
+
   return (
     <ScrollView style={styles.send}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Products");
+          navigation.navigate(screenName);
         }}
         style={styles.arrow}
       >

@@ -83,7 +83,7 @@ export default function Profil({ navigation }: any) {
     <View style={styles.profil}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("Pulpit");
         }}
         style={styles.arrow}
       >

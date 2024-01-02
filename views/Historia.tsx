@@ -3,17 +3,26 @@ import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
 import React from "react";
 import { LastTransaction } from "./LastTransaction";
+import { useRoute } from "@react-navigation/native";
 interface TransactionListI {
   name: string;
   amount: number;
   typePay: string;
 }
+
+interface PrzekazanaNazwa {
+  screenName?: string;
+}
+
 export const Historia = ({ navigation }: any) => {
+  const route = useRoute();
+  const { screenName } = route.params as PrzekazanaNazwa;
+
   return (
     <ScrollView marginBottom={30} style={styles.ladowanie}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Products");
+          navigation.navigate(screenName);
         }}
         style={styles.arrow}
       >

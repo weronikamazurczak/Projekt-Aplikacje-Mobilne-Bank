@@ -10,21 +10,27 @@ import {
   Heading,
   Input,
   InputField,
-  Textarea,
-  TextareaInput,
   VStack,
   View,
   Button,
   ArrowRightIcon,
   ButtonIcon,
 } from "@gluestack-ui/themed";
+import { useRoute } from "@react-navigation/native";
+
+interface PrzekazanaNazwa {
+  screenName?: string;
+}
 
 export default function Transfer({ navigation }: any) {
+  const route = useRoute();
+  const { screenName } = route.params as PrzekazanaNazwa;
+
   return (
     <ScrollView style={styles.transfer}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Products");
+          navigation.navigate(screenName);
         }}
         style={styles.arrow}
       >
