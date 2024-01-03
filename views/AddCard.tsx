@@ -67,6 +67,7 @@ export const AddCard = ({ navigation }: any) => {
   ] = useState(false);
   const [czyNiePrawidlowyNumerCVC, ustawCzyNiePrawidlowyNumerCVC] =
     useState(false);
+  const [czyZwalidowaneDane, ustawCzyZwalidowaneDane] = useState(false);
 
   const route = useRoute();
   const { name } = route.params as DaneRejestracja;
@@ -76,7 +77,12 @@ export const AddCard = ({ navigation }: any) => {
 
   return (
     <View style={styles.register}>
-      <Pressable onPress={() => {}} style={styles.arrow}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("Register");
+        }}
+        style={styles.arrow}
+      >
         <AntDesign name="arrowleft" size={50} color="black" />
       </Pressable>
       <Text style={styles.titleAddCard}>Dodaj kartę</Text>
@@ -198,27 +204,37 @@ export const AddCard = ({ navigation }: any) => {
 
       <Button
         onPress={() => {
-          if (cardNumber.replace(/\s/g, "").length !== 16) {
-            ustawCzyNiePrawidlowyNumerKarty(true);
-          } else {
-            ustawCzyNiePrawidlowyNumerKarty(false);
-          }
-          if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(cardDate)) {
-            ustawCzyNiePrawidlowaDataWygasniecia(true);
-          } else {
-            ustawCzyNiePrawidlowaDataWygasniecia(false);
-          }
-          if (cvv.length !== 3) {
-            ustawCzyNiePrawidlowyNumerCVC(true);
-          } else{
-            ustawCzyNiePrawidlowyNumerCVC(false);
+          ustawCzyZwalidowaneDane(false);
+          if (!czyZwalidowaneDane) {
+            if (cardNumber.replace(/\s/g, "").length !== 16) {
+              ustawCzyNiePrawidlowyNumerKarty(true);
+            } else {
+              ustawCzyNiePrawidlowyNumerKarty(false);
+            }
+            if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(cardDate)) {
+              ustawCzyNiePrawidlowaDataWygasniecia(true);
+            } else {
+              ustawCzyNiePrawidlowaDataWygasniecia(false);
+            }
+            if (cvv.length !== 3) {
+              ustawCzyNiePrawidlowyNumerCVC(true);
+            } else {
+              ustawCzyNiePrawidlowyNumerCVC(false);
+            }
+            ustawCzyZwalidowaneDane(true);
           }
 
           if (
             !czyNiePrawidlowyNumerKarty &&
             !czyNiePrawidlowaDataWygasniecia &&
-            !czyNiePrawidlowyNumerCVC
-          ){}else {
+            !czyNiePrawidlowyNumerCVC &&
+            czyZwalidowaneDane
+          ) {
+            console.log(
+              !czyNiePrawidlowyNumerKarty,
+              !czyNiePrawidlowaDataWygasniecia,
+              !czyNiePrawidlowyNumerCVC
+            );
             WyslijDoBazy({
               name: name,
               email: email,

@@ -49,15 +49,6 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Historia"
-        component={Historia}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="calendar" size={24} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Produkty"
         component={Products}
         options={{
@@ -67,6 +58,15 @@ function TabNavigator() {
               size={24}
               color={color}
             />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Historia"
+        component={Historia}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="calendar" size={24} color={color} />
           ),
         }}
       />
