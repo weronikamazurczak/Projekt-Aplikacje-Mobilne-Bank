@@ -25,7 +25,21 @@ interface PrzekazanaNazwa {
 export default function Send({ navigation }: any) {
   const route = useRoute();
   const { screenName } = route.params as PrzekazanaNazwa;
-
+  //   //Otrzymane parametry z ekranu HomeScreen
+  //   navigation.navigate("Send", route.params = { screenName: "Pulpit" });
+  //   route:{
+  //     params:{
+  //       screenName: "Pulpit"
+  //     }
+  //   }
+  //   // Otrzymane parametry z ekranu Send2
+  //   navigation.navigate("Send", route.params = { screenName: "nazwascreena"});
+  //   route:{
+  //     params:{
+  //       undefined
+  //     }
+  //   }
+  console.log(screenName);
   return (
     <ScrollView style={styles.send}>
       <Pressable
@@ -68,7 +82,7 @@ export default function Send({ navigation }: any) {
       <View style={{ rowGap: 18 }}>
         <Pressable
           onPress={() => {
-            navigation.navigate("Send2");
+            navigation.navigate("Send2", { screenName: "Pulpit" });
           }}
         >
           <HStack space="lg">

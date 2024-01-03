@@ -8,21 +8,24 @@ import {
   ButtonText,
   Avatar,
   AvatarImage,
-  FormControl,
-  FormControlLabel,
-  FormControlLabelText,
-  Input,
-  InputField,
 } from "@gluestack-ui/themed";
 import ModernKeyboard from "react-native-modern-keyboard";
+import { useRoute } from "@react-navigation/native";
+
+interface PrzekazanaNazwa {
+  screenName?: string;
+}
 
 export default function Send2({ navigation }: any) {
   const [input, setInput] = useState<string>();
+  const route = useRoute();
+  const { screenName } = route.params as PrzekazanaNazwa;
+  console.log(screenName);
   return (
     <View style={styles.send}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Send");
+          navigation.navigate("Send", { screenName: screenName });
         }}
         style={styles.arrow}
       >
