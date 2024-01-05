@@ -2,7 +2,7 @@ import { config } from "@gluestack-ui/config";
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 import OnboardScreens from "./OnboardScreens";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SplashScreen from "./SplashScreen";
 import { useEffect } from "react";
@@ -24,8 +24,7 @@ import Transfer from "./Transfer";
 import TransferCompleted from "./TransferCompleted";
 import Send from "./Send";
 import Send2 from "./Send2";
-import { Historia } from "./Historia";
-
+import Historia from "./Historia";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -69,6 +68,7 @@ function TabNavigator() {
             <AntDesign name="calendar" size={24} color={color} />
           ),
         }}
+        initialParams={{ screenName: "Pulpit" }}
       />
       <Tab.Screen
         name="Profil"
@@ -117,7 +117,11 @@ export default function App() {
           />
           <Stack.Screen name="Send" component={Send} />
           <Stack.Screen name="Send2" component={Send2} />
-          <Stack.Screen name="Historia" component={Historia} />
+          <Stack.Screen
+            name="Historia"
+            component={Historia}
+            initialParams={{ screenName: "Pulpit" }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>
