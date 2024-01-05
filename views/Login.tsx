@@ -105,8 +105,7 @@ export default function Login({ navigation }: any) {
           if (password.length < 8) {
             ustawCzyNiePrawidloweHaslo(true);
           } else if (email.includes("@") && password.length > 8) {
-            // jesli uzytkownik istnieje w bazie
-            navigation.navigate("Home");
+            ZalogujUzytkownika(email, password, navigation);
           }
         }}
         style={styles.registerNextButton}
@@ -143,4 +142,30 @@ export default function Login({ navigation }: any) {
       </View>
     </View>
   );
+}
+
+async function ZalogujUzytkownika(
+  email: string,
+  password: string,
+  navigation: any
+) {
+  const firebaseLinkDoBazy =
+    "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
+  const sciezkaDoBazy = "/uzytkownicy.json";
+  const ApiKey = "AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24";
+  const LinkZadania = `${firebaseLinkDoBazy}${sciezkaDoBazy}?key=${ApiKey}`;
+  try {
+    const response = await fetch(LinkZadania);
+    const data = await response.json();
+    for (const aktualniePobranaDana in data) {
+      const aktualniePobranyUzytkownik = data[aktualniePobranaDana];
+      if (
+        aktualniePobranyUzytkownik.email == email &&
+        aktualniePobranyUzytkownik.password == password
+      )
+        navigation.navigate("Home");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }

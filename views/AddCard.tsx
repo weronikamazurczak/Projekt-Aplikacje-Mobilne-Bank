@@ -32,28 +32,6 @@ interface DaneRejestracja {
   confirmPassword?: string | undefined;
 }
 
-async function WyslijDoBazy(params: any) {
-  const firebaseLinkDoBazy =
-    "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
-  const sciezkaDoBazy = "/uzytkownicy.json";
-  const ApiKey = "AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24";
-  const LinkZadania = `${firebaseLinkDoBazy}${sciezkaDoBazy}?key=${ApiKey}`;
-  try {
-    const response = await fetch(LinkZadania, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(params),
-    });
-    if (response.ok) {
-      console.log("rejestracja ok");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export const AddCard = ({ navigation }: any) => {
   const [cardNumber, setCardNumber] = useState("");
   const [cardDate, setCardDate] = useState("");
@@ -266,3 +244,25 @@ export const AddCard = ({ navigation }: any) => {
     </View>
   );
 };
+
+async function WyslijDoBazy(params: any) {
+  const firebaseLinkDoBazy =
+    "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
+  const sciezkaDoBazy = "/uzytkownicy.json";
+  const ApiKey = "AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24";
+  const LinkZadania = `${firebaseLinkDoBazy}${sciezkaDoBazy}?key=${ApiKey}`;
+  try {
+    const response = await fetch(LinkZadania, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    });
+    if (response.ok) {
+      console.log("rejestracja ok");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}

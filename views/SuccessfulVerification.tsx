@@ -16,7 +16,7 @@ export default function SuccessfulVerification({ navigation }: any) {
         korzystać z pełnej funkcjonalności
       </Text>
       <Button
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate("Login")}
         style={styles.registerNextButton}
         size="lg"
         variant="solid"
