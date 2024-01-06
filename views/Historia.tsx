@@ -12,12 +12,14 @@ interface TransactionListI {
 
 interface PrzekazanaNazwa {
   screenName?: string;
+  kluczZalogowanegoUżytkownika: string;
 }
 
-export default function Historia ({ navigation }: any)  {
+export default function Historia({ navigation }: any) {
   const route = useRoute();
   console.log(route.params);
-  const { screenName } = route.params as PrzekazanaNazwa;
+  const { screenName, kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanaNazwa;
   return (
     <ScrollView marginBottom={30} style={styles.ladowanie}>
       <Pressable
@@ -43,4 +45,4 @@ export default function Historia ({ navigation }: any)  {
       <LastTransaction />
     </ScrollView>
   );
-};
+}

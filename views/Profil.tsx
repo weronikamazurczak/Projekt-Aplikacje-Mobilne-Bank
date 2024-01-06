@@ -15,7 +15,17 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
+import { useRoute } from "@react-navigation/native";
+
+interface PrzekazanyKluczUzytkownika {
+  kluczZalogowanegoUżytkownika: string;
+}
+
 export default function Profil({ navigation }: any) {
+  const route = useRoute();
+  const { kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanyKluczUzytkownika;
+
   const [nameFromDatabase, setNameFromDatabase] = useState("");
   const [emailFromDatabase, setEmailFromDatabase] = useState("");
   const [cardNumberFromDatabase, setCardNumberFromDatabase] = useState("");
@@ -26,11 +36,9 @@ export default function Profil({ navigation }: any) {
         "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/uzytkownicy.json"
       );
       const data = await response.json();
-      const id = Object.keys(data);
-      const lastID = id[id.length - 1];
 
-      if (data[lastID].name) {
-        setNameFromDatabase(data[lastID].name);
+      if (data[kluczZalogowanegoUżytkownika].name) {
+        setNameFromDatabase(data[kluczZalogowanegoUżytkownika].name);
       }
     } catch (error) {
       console.error("Błąd podczas pobierania danych z bazy danych:", error);
@@ -44,11 +52,9 @@ export default function Profil({ navigation }: any) {
       );
       const data = await response.json();
 
-      for (const id in data) {
-        const user = data[id];
-        if (user.email) {
-          setEmailFromDatabase(user.email);
-        }
+      const user = data[kluczZalogowanegoUżytkownika];
+      if (user.email) {
+        setEmailFromDatabase(user.email);
       }
     } catch (error) {
       console.error("Błąd podczas pobierania danych z bazy danych:", error);
@@ -62,11 +68,9 @@ export default function Profil({ navigation }: any) {
       );
       const data = await response.json();
 
-      for (const id in data) {
-        const user = data[id];
-        if (user.cardNumber) {
-          setCardNumberFromDatabase(user.cardNumber);
-        }
+      const user = data[kluczZalogowanegoUżytkownika];
+      if (user.cardNumber) {
+        setCardNumberFromDatabase(user.cardNumber);
       }
     } catch (error) {
       console.error("Błąd podczas pobierania danych z bazy danych:", error);

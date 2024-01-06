@@ -20,11 +20,13 @@ import { useRoute } from "@react-navigation/native";
 
 interface PrzekazanaNazwa {
   screenName?: string;
+  kluczZalogowanegoUżytkownika?: string;
 }
 
 export default function Transfer({ navigation }: any) {
   const route = useRoute();
-  const { screenName } = route.params as PrzekazanaNazwa;
+  const { screenName, kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanaNazwa;
 
   return (
     <ScrollView style={styles.transfer}>
@@ -129,7 +131,9 @@ export default function Transfer({ navigation }: any) {
 
       <Button
         onPress={() => {
-          navigation.navigate("TransferCompleted");
+          navigation.navigate("TransferCompleted", {
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+          });
         }}
         style={styles.registerNextButton}
         size="lg"

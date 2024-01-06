@@ -163,7 +163,9 @@ async function ZalogujUzytkownika(
         aktualniePobranyUzytkownik.email == email &&
         aktualniePobranyUzytkownik.password == password
       )
-        navigation.navigate("Home");
+        navigation.navigate("Home", {
+          kluczZalogowanegoUżytkownika: aktualniePobranaDana,
+        });
     }
   } catch (error) {
     console.error(error);

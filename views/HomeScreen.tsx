@@ -16,31 +16,21 @@ import CreditCardUI from "rn-credit-card-ui/src/components/CreditCardUI";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LastTransaction } from "./LastTransaction";
 import React, { useEffect, useState } from "react";
+import { useRoute } from "@react-navigation/native";
+
+interface PrzekazanyKluczUzytkownika {
+  kluczZalogowanegoUżytkownika: string;
+}
 
 export default function HomeScreen({ navigation }: any) {
+  const route = useRoute();
+  const { kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanyKluczUzytkownika;
+
   const [nameFromDatabase, setNameFromDatabase] = useState("");
   const [cardNumberFromDatabase, setCardNumberFromDatabase] = useState("");
   const [numberCVC, setNumberCVC] = useState("");
   const [cardDateFromDatebase, setCardDateFromDatebase] = useState("");
-
-  // const fetchUserName = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/uzytkownicy.json"
-  //     );
-  //     const data = await response.json();
-
-  //     for (const id in data) {
-  //       const user = data[id];
-  //       if (user.name) {
-  //         setNameFromDatabase(user.name);
-  //         break;
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Błąd podczas pobierania danych z bazy danych:", error);
-  //   }
-  // };
 
   const fetchUserName = async () => {
     try {
@@ -48,12 +38,7 @@ export default function HomeScreen({ navigation }: any) {
         "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/uzytkownicy.json"
       );
       const data = await response.json();
-      const id = Object.keys(data);
-      const lastID = id[id.length - 1];
-
-      if (data[lastID].name) {
-        setNameFromDatabase(data[lastID].name);
-      }
+      setNameFromDatabase(data[kluczZalogowanegoUżytkownika].name);
     } catch (error) {
       console.error("Błąd podczas pobierania danych z bazy danych:", error);
     }
@@ -66,11 +51,9 @@ export default function HomeScreen({ navigation }: any) {
       );
       const data = await response.json();
 
-      for (const id in data) {
-        const user = data[id];
-        if (user.cardNumber) {
-          setCardNumberFromDatabase(user.cardNumber);
-        }
+      const user = data[kluczZalogowanegoUżytkownika];
+      if (user.cardNumber) {
+        setCardNumberFromDatabase(user.cardNumber);
       }
     } catch (error) {
       console.error("Błąd podczas pobierania danych z bazy danych:", error);
@@ -84,11 +67,9 @@ export default function HomeScreen({ navigation }: any) {
       );
       const data = await response.json();
 
-      for (const id in data) {
-        const user = data[id];
-        if (user.cvv) {
-          setNumberCVC(user.cvv);
-        }
+      const user = data[kluczZalogowanegoUżytkownika];
+      if (user.cvv) {
+        setNumberCVC(user.cvv);
       }
     } catch (error) {
       console.error("Błąd podczas pobierania danych z bazy danych:", error);
@@ -102,11 +83,9 @@ export default function HomeScreen({ navigation }: any) {
       );
       const data = await response.json();
 
-      for (const id in data) {
-        const user = data[id];
-        if (user.cardDate) {
-          setCardDateFromDatebase(user.cardDate);
-        }
+      const user = data[kluczZalogowanegoUżytkownika];
+      if (user.cardDate) {
+        setCardDateFromDatebase(user.cardDate);
       }
     } catch (error) {
       console.error("Błąd podczas pobierania danych z bazy danych:", error);
@@ -124,7 +103,11 @@ export default function HomeScreen({ navigation }: any) {
     <ScrollView style={styles.main}>
       <VStack space="2xl" style={styles.awatar}>
         <Pressable
-          onPress={() => navigation.navigate("Notification")}
+          onPress={() =>
+            navigation.navigate("Notification", {
+              kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+            })
+          }
           style={styles.bell}
         >
           <FontAwesome5 name="bell" size={50} color="#254C48" />
@@ -221,7 +204,10 @@ export default function HomeScreen({ navigation }: any) {
         <View>
           <Pressable
             onPress={() => {
-              navigation.navigate("Transfer", { screenName: "Pulpit" });
+              navigation.navigate("Transfer", {
+                screenName: "Pulpit",
+                kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+              });
             }}
             style={styles.iconProductHome}
           >

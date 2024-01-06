@@ -3,13 +3,23 @@ import React from "react";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import { View, Image, Button, ButtonText } from "@gluestack-ui/themed";
+import { useRoute } from "@react-navigation/native";
+
+interface PrzekazanyKluczUzytkownika {
+  kluczZalogowanegoUżytkownika: string;
+}
 
 export default function TransferCompleted({ navigation }: any) {
+  const route = useRoute();
+  const { kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanyKluczUzytkownika;
   return (
     <View style={styles.transfer}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("Home", {
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+          });
         }}
         style={styles.arrow}
       >

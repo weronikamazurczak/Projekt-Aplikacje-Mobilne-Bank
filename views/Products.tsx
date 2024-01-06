@@ -3,8 +3,16 @@ import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import styles from "./styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRoute } from "@react-navigation/native";
+
+interface PrzekazanyKluczUzytkownika {
+  kluczZalogowanegoUżytkownika: string;
+}
 
 export default function Products({ navigation }: any) {
+  const route = useRoute();
+  const { kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanyKluczUzytkownika;
   return (
     <View style={styles.ladowanie}>
       <Pressable
@@ -75,7 +83,10 @@ export default function Products({ navigation }: any) {
         </Pressable>
         <Pressable
           onPress={() => {
-            navigation.navigate("Transfer", { screenName: "Produkty" });
+            navigation.navigate("Transfer", {
+              screenName: "Produkty",
+              kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+            });
           }}
           style={styles.iconProduct}
         >

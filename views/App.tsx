@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SplashScreen from "./SplashScreen";
-import { useEffect } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import { AddCard } from "./AddCard";
@@ -28,7 +27,14 @@ import Historia from "./Historia";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+interface PrzekazanyKluczUzytkownika {
+  kluczZalogowanegoUżytkownika?: string;
+}
+
 function TabNavigator() {
+  const route = useRoute();
+  const { kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanyKluczUzytkownika;
   return (
     <Tab.Navigator
       initialRouteName="Pulpit"
@@ -46,6 +52,22 @@ function TabNavigator() {
             <Ionicons name="ios-home-outline" size={24} color={color} />
           ),
         }}
+        initialParams={{
+          kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+        }}
+      />
+      <Tab.Screen
+        name="Historia"
+        component={Historia}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="calendar" size={24} color={color} />
+          ),
+        }}
+        initialParams={{
+          screenName: "Pulpit",
+          kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+        }}
       />
       <Tab.Screen
         name="Produkty"
@@ -59,16 +81,9 @@ function TabNavigator() {
             />
           ),
         }}
-      />
-      <Tab.Screen
-        name="Historia"
-        component={Historia}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="calendar" size={24} color={color} />
-          ),
+        initialParams={{
+          kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
         }}
-        initialParams={{ screenName: "Pulpit" }}
       />
       <Tab.Screen
         name="Profil"
@@ -77,6 +92,9 @@ function TabNavigator() {
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="user" size={24} color={color} />
           ),
+        }}
+        initialParams={{
+          kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
         }}
       />
     </Tab.Navigator>

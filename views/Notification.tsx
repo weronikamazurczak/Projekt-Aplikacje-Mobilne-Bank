@@ -9,6 +9,8 @@ import {
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
+import { useRoute } from "@react-navigation/native";
+
 interface NotificationI {
   transactionType: string;
   amount?: number | null;
@@ -16,7 +18,15 @@ interface NotificationI {
   timeNotification: string;
 }
 
+interface PrzekazanyKluczUzytkownika {
+  kluczZalogowanegoUżytkownika?: string;
+}
+
 export default function Notification({ navigation }: any) {
+  const route = useRoute();
+  const { kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanyKluczUzytkownika;
+
   const NotifactionElement = (arrayNotification: NotificationI[]) => {
     return arrayNotification.map((item, index) => (
       <View
@@ -30,7 +40,7 @@ export default function Notification({ navigation }: any) {
           marginHorizontal: 15,
           borderBottomColor: "gray",
           borderBottomWidth: 1,
-          backgroundColor: '#FAFAFA',
+          backgroundColor: "#FAFAFA",
         }}
       >
         <View style={{}}>
@@ -165,7 +175,9 @@ export default function Notification({ navigation }: any) {
     <ScrollView>
       <Pressable
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("Home", {
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+          });
         }}
         style={styles.arrowProduct}
       >
