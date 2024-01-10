@@ -5,6 +5,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to use Face ID."
+        }
+      ]
+    ],
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
@@ -13,7 +21,10 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Ta aplikacja wymaga dostępu do Face ID w celu uwierzytelniania."
+      }
     },
     "android": {
       "adaptiveIcon": {

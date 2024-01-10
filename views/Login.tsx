@@ -19,12 +19,15 @@ import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [czyNiePrawidloweHaslo, ustawCzyNiePrawidloweHaslo] = useState(false);
   const [czyNiePrawidloweEmail, ustawCzyNiePrawidloweEmail] = useState(false);
+
+
 
   return (
     <View style={styles.login}>
@@ -139,16 +142,37 @@ export default function Login({ navigation }: any) {
             Załóż je już teraz
           </Text>
         </Pressable>
+
       </View>
+ 
+        <Button onPress={() => navigation.navigate("FaceVerification")}
+                style={styles.registerNextButton}
+                size="lg"
+                variant="solid"
+                action="primary"
+                isDisabled={false}
+                isFocusVisible={false}>
+      <ButtonText style={{ color: "#000" }}>
+           skanuj twarz
+          </ButtonText>
+        </Button>
+        
     </View>
   );
 }
 
-async function ZalogujUzytkownika(
+export async function ZalogujUzytkownika(
   email: string,
   password: string,
   navigation: any
 ) {
+  const saveCredentials = (login: string, password: string) => {
+ 
+    AsyncStorage.setItem('login', login);
+    AsyncStorage.setItem('password', password);
+   console.log('Dane zapisane pomyślnie!');
+
+};
   const firebaseLinkDoBazy =
     "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
   const sciezkaDoBazy = "/uzytkownicy.json";
@@ -163,9 +187,13 @@ async function ZalogujUzytkownika(
         aktualniePobranyUzytkownik.email == email &&
         aktualniePobranyUzytkownik.password == password
       )
+      {
+        saveCredentials(email,password);
         navigation.navigate("Home", {
           kluczZalogowanegoUżytkownika: aktualniePobranaDana,
         });
+      }
+      
     }
   } catch (error) {
     console.error(error);

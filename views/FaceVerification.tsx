@@ -4,9 +4,10 @@ import { Button, ButtonText } from "@gluestack-ui/themed";
 import * as LocalAuthentication from "expo-local-authentication";
 import styles from "./styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ZalogujUzytkownika } from "./Login";
 
 export default function FaceVerification({ navigation }: any) {
-
+  
 
   const readCredentials = async () => {
     try {
@@ -16,6 +17,7 @@ export default function FaceVerification({ navigation }: any) {
       if (login !== null && password !== null) {
         console.log('Login:', login);
         console.log('Hasło:', password);
+        ZalogujUzytkownika(login,password,navigation)
       } else {
         console.log('Brak zapisanych danych.');
       }
@@ -30,11 +32,15 @@ export default function FaceVerification({ navigation }: any) {
       try {
        
         const isBiometricAvailable = await LocalAuthentication.hasHardwareAsync();
-
-        if (isBiometricAvailable) {
+        const supportedTypes = await LocalAuthentication.supportedAuthenticationTypesAsync();
+   
+        if (isBiometricAvailable && supportedTypes.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION)) {
          
           const result = await LocalAuthentication.authenticateAsync({
-            promptMessage: 'Autoryzacja przy użyciu biometrii',
+            promptMessage: 'Autoryzacja przy użyciu faceID',
+            cancelLabel: "Anuluj",
+            fallbackLabel: "Użyj kodu PIN",
+            disableDeviceFallback: false,
           });
 
           if (result.success) {
