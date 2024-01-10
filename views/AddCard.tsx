@@ -221,6 +221,7 @@ export const AddCard = ({ navigation }: any) => {
               cardNumber: cardNumber,
               cardDate: cardDate,
               cvv: cvv,
+              balance: 100,
             });
             navigation.navigate("FaceVerification");
           }
