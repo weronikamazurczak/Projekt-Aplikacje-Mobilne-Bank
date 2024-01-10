@@ -91,3 +91,17 @@ export const LastTransaction = ({ navigation }: any) => {
     </View>
   );
 };
+
+//Obiekt z bazy:
+/*
+transakcje:{
+  kluczAktualnieZalogowanegoUzytkownika:{
+    kluczTranskacji1:{
+      kwotaTransakcji: "123"
+      nazwaOdbiorcy: "sdfsdf"
+      tutulPrzelewu: "asdf"
+      (TE TRZY POLA SĄ Z EKRANU PRZELEW KRAJOWY GDZIE WPISUJE SIE ODBIORCE, KWOTE, TYUL )
+    }
+  }
+}
+*/

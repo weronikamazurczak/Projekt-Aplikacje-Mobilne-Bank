@@ -1,5 +1,5 @@
 import { Text, Pressable, ScrollView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import {
@@ -20,13 +20,17 @@ import { useRoute } from "@react-navigation/native";
 
 interface PrzekazanaNazwa {
   screenName?: string;
-  kluczZalogowanegoUżytkownika?: string;
+  kluczZalogowanegoUżytkownika: string;
 }
 
 export default function Transfer({ navigation }: any) {
   const route = useRoute();
   const { screenName, kluczZalogowanegoUżytkownika } =
     route.params as PrzekazanaNazwa;
+
+  const [nazwaOdbiorcy, setNazwaOdbiorcy] = useState("");
+  const [kwotaTransakcji, setKwotaTransakcji] = useState("");
+  const [tutulPrzelewu, setTytulPrzelewu] = useState("");
 
   return (
     <ScrollView style={styles.transfer}>
@@ -83,6 +87,9 @@ export default function Transfer({ navigation }: any) {
               fontSize={14}
               type="text"
               placeholder="Wyszukaj odbiorce po imieniu lub email"
+              onChangeText={(nazwaOdbiorcy) => {
+                setNazwaOdbiorcy(nazwaOdbiorcy);
+              }}
             />
           </Input>
         </FormControl>
@@ -100,7 +107,14 @@ export default function Transfer({ navigation }: any) {
             </FormControlLabelText>
           </FormControlLabel>
           <Input style={styles.boxTransfer}>
-            <InputField fontSize={14} type="text" placeholder="Wpisz kwotę" />
+            <InputField
+              fontSize={14}
+              type="text"
+              placeholder="Wpisz kwotę"
+              onChangeText={(kwotaTransakcji) => {
+                setKwotaTransakcji(kwotaTransakcji);
+              }}
+            />
           </Input>
           <Text style={styles.textTransfer}>PLN</Text>
         </FormControl>
@@ -124,6 +138,9 @@ export default function Transfer({ navigation }: any) {
               fontSize={14}
               type="text"
               placeholder="Przelew środków"
+              onChangeText={(tutulPrzelewu) => {
+                setTytulPrzelewu(tutulPrzelewu);
+              }}
             />
           </Input>
         </FormControl>
@@ -131,6 +148,11 @@ export default function Transfer({ navigation }: any) {
 
       <Button
         onPress={() => {
+          WyslijPrzelewDoBazy(kluczZalogowanegoUżytkownika,{
+            nazwaOdbiorcy: nazwaOdbiorcy,
+            kwotaTransakcji: kwotaTransakcji,
+            tutulPrzelewu: tutulPrzelewu,
+          });
           navigation.navigate("TransferCompleted", {
             kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
           });
@@ -147,4 +169,29 @@ export default function Transfer({ navigation }: any) {
       </Button>
     </ScrollView>
   );
+}
+
+async function WyslijPrzelewDoBazy( kluczZalogowanegoUżytkownika:string, obiekt: object) {
+  const firebaseLinkDoBazy =
+    "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
+  const sciezkaDoBazy = "/transakcje";
+  const kluczAktualnieZalogowanegoUzytkownika =
+    "/" + kluczZalogowanegoUżytkownika + ".json";
+    console.log(kluczZalogowanegoUżytkownika);
+  const ApiKey = "AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24";
+  const LinkZadania = `${firebaseLinkDoBazy}${sciezkaDoBazy}${kluczAktualnieZalogowanegoUzytkownika}?key=${ApiKey}`;
+  try {
+    const response = await fetch(LinkZadania, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obiekt),
+    });
+    if (response.ok) {
+      console.log("Dane transakcji przelwu wyslane do bazy");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
