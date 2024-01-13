@@ -20,14 +20,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as LocalAuthentication from "expo-local-authentication";
 
 export default function Login({ navigation }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [czyNiePrawidloweHaslo, ustawCzyNiePrawidloweHaslo] = useState(false);
   const [czyNiePrawidloweEmail, ustawCzyNiePrawidloweEmail] = useState(false);
-
-
 
   return (
     <View style={styles.login}>
@@ -110,6 +109,8 @@ export default function Login({ navigation }: any) {
           } else if (email.includes("@") && password.length > 8) {
             ZalogujUzytkownika(email, password, navigation);
           }
+
+
         }}
         style={styles.registerNextButton}
         size="lg"
@@ -189,9 +190,23 @@ export async function ZalogujUzytkownika(
       )
       {
         saveCredentials(email,password);
-        navigation.navigate("Home", {
-          kluczZalogowanegoUżytkownika: aktualniePobranaDana,
-        });
+        if(aktualniePobranyUzytkownik.biometricAuthFinger){
+          // Jeśli biometricAuthFinger jest true, poproś o weryfikację palcem
+          const result = await LocalAuthentication.authenticateAsync({
+            promptMessage: 'Autoryzacja przy użyciu TouchID',
+          });
+          if (result.success) {
+            // Jeśli weryfikacja palcem powiodła się, przekieruj dalej
+            navigation.navigate("Home", {
+              kluczZalogowanegoUżytkownika: aktualniePobranaDana,
+            });
+          }
+        }else {
+          // Jeśli biometricAuthFinger jest false, przekieruj dalej
+          navigation.navigate("Home", {
+            kluczZalogowanegoUżytkownika: aktualniePobranaDana,
+          });
+        }
       }
       
     }

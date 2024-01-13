@@ -61,7 +61,7 @@ export default function FaceVerification({ navigation }: any) {
     <View style={styles.register}>
       <Text>FaceVerification</Text>
       <Button
-        onPress={navigation.navigate("FingerVerification")}
+        onPress={checkBiometrics}
         style={styles.registerNextButton}
         size="lg"
         variant="solid"
