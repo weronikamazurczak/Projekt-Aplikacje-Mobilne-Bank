@@ -43,7 +43,8 @@ export default function Products({ navigation }: any) {
       >
         <Pressable
           onPress={() => {
-            navigation.navigate("Send", { screenName: "Produkty" });
+            navigation.navigate("Send", { screenName: "Produkty",
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika });
           }}
           style={styles.iconProduct}
         >

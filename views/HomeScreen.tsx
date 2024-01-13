@@ -160,7 +160,8 @@ export default function HomeScreen({ navigation }: any) {
         <View>
           <Pressable
             onPress={() => {
-              navigation.navigate("Send", { screenName: "Pulpit" });
+              navigation.navigate("Send", { screenName: "Pulpit" , 
+              kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika});
             }}
             style={styles.iconProductHome}
           >

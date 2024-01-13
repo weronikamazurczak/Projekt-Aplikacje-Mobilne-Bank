@@ -20,10 +20,14 @@ import { useRoute } from "@react-navigation/native";
 
 interface PrzekazanaNazwa {
   screenName?: string;
+  kluczZalogowanegoUżytkownika: string;
 }
 
 export default function Send({ navigation }: any) {
   const route = useRoute();
+  const { kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanaNazwa;
+    console.log(kluczZalogowanegoUżytkownika ,"nbckasjdcfnbs");
   const { screenName } = route.params as PrzekazanaNazwa;
   //   //Otrzymane parametry z ekranu HomeScreen
   //   navigation.navigate("Send", route.params = { screenName: "Pulpit" });
@@ -82,7 +86,8 @@ export default function Send({ navigation }: any) {
       <View style={{ rowGap: 18 }}>
         <Pressable
           onPress={() => {
-            navigation.navigate("Send2", { screenName: "Pulpit" });
+            navigation.navigate("Send2", { screenName: "Pulpit" ,
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika});
           }}
         >
           <HStack space="lg">

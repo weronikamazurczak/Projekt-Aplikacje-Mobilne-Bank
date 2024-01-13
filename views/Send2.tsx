@@ -15,17 +15,15 @@ import { useRoute } from "@react-navigation/native";
 
 interface PrzekazanaNazwa {
   screenName?: string;
-}
-
-interface PrzekazanyKluczUzytkownika {
   kluczZalogowanegoUżytkownika: string;
 }
+
 
 export default function Send2({ navigation }: any) {
   const [input, setInput] = useState<string>();
   const route = useRoute();
   const { kluczZalogowanegoUżytkownika } =
-    route.params as PrzekazanyKluczUzytkownika;
+    route.params as PrzekazanaNazwa;
   const { screenName } = route.params as PrzekazanaNazwa;
   console.log(screenName);
 
@@ -39,7 +37,7 @@ export default function Send2({ navigation }: any) {
       const data = await response.json();
 
       const user = data[kluczZalogowanegoUżytkownika];
-      if (user && user.balance) {
+      if (user.balance) {
         setBalanceFromDatabase(user.balance);
       }
     } catch (error) {
@@ -55,7 +53,8 @@ export default function Send2({ navigation }: any) {
     <View style={styles.send}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Send", { screenName: screenName });
+          navigation.navigate("Send", { screenName: screenName , 
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika});
         }}
         style={styles.arrow}
       >
