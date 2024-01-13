@@ -62,29 +62,6 @@ export default function FingerVerification({ navigation }: any) {
 
   };
 
-  const handleFingerVerification2 = async () => {
-    if (!isBiometricSupported) {
-      return;
-    }
-    const result = await LocalAuthentication.authenticateAsync();
-    setBiometricAuth(result.success); // Zaktualizuj stan biometricAuth
-    if (!result.success) {
-      WyslijDoBazy({
-        name: name,
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
-        cardNumber: cardNumber,
-        cardDate: cardDate,
-        cvv: cvv,
-        balance: balance,
-        biometricAuthFinger: result.success, // Przekazujesz wartość result.success
-      });
-      navigation.navigate("SuccessfulVerification");
-    }
-
-  };
-
   return (
     <View style={styles.fingerVerification}>
       <Pressable
@@ -123,7 +100,18 @@ export default function FingerVerification({ navigation }: any) {
 
       <Button
         onPress={() => {
-          handleFingerVerification2()
+          WyslijDoBazy({
+            name: name,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+            cardNumber: cardNumber,
+            cardDate: cardDate,
+            cvv: cvv,
+            balance: balance,
+            biometricAuthFinger: false, // Przekazujesz wartość result.success
+          });
+          navigation.navigate("SuccessfulVerification");
         }}
         style={styles.fingerSkip}
         size="lg"
