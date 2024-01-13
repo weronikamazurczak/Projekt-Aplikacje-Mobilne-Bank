@@ -223,7 +223,7 @@ export const AddCard = ({ navigation }: any) => {
               cvv: cvv,
               balance: 100,
             });
-            navigation.navigate("FaceVerification");
+            navigation.navigate("FingerVerification");
           }
         }}
         style={styles.addCardNaxtButton}

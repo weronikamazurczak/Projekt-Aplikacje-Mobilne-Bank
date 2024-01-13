@@ -23,7 +23,7 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSFaceIDUsageDescription": "Ta aplikacja wymaga dostępu do Face ID w celu uwierzytelniania."
+        "NSFaceIDUsageDescription": "Ta aplikacja wymaga dostępu do Face ID i w celu uwierzytelniania."
       }
     },
     "android": {
