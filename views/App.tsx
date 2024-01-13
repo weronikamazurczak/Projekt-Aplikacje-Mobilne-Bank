@@ -24,6 +24,8 @@ import TransferCompleted from "./TransferCompleted";
 import Send from "./Send";
 import Send2 from "./Send2";
 import Historia from "./Historia";
+import Send3 from "./Send3";
+import Send4 from "./Send4";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -135,6 +137,8 @@ export default function App() {
           />
           <Stack.Screen name="Send" component={Send} />
           <Stack.Screen name="Send2" component={Send2} />
+          <Stack.Screen name="Send3" component={Send3} />
+          <Stack.Screen name="Send4" component={Send4} />
           <Stack.Screen
             name="Historia"
             component={Historia}

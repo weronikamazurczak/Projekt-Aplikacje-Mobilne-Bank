@@ -58,30 +58,6 @@ export default function Send({ navigation }: any) {
       <Text style={styles.titleSend}>Wyślij</Text>
       <Text style={styles.selectPerson}>Wybierz odbiorcę zdefiniowanego </Text>
 
-      <View>
-        <FormControl
-          size="sm"
-          isDisabled={false}
-          isInvalid={false}
-          isReadOnly={false}
-          isRequired={true}
-        >
-          <FormControlLabel mb="$1">
-            <FormControlLabelText
-              style={styles.labelSend}
-            ></FormControlLabelText>
-          </FormControlLabel>
-          <Input style={styles.boxSend}>
-            <InputField
-              fontSize={14}
-              type="text"
-              placeholder="Wyszukaj odbiorce po imieniu lub email"
-            />
-          </Input>
-        </FormControl>
-      </View>
-
-      <Text style={styles.lastSend}>Ostatnie transakcje </Text>
 
       <View style={{ rowGap: 18 }}>
         <Pressable
@@ -107,7 +83,8 @@ export default function Send({ navigation }: any) {
 
         <Pressable
           onPress={() => {
-            navigation.navigate("Send2");
+            navigation.navigate("Send3", { screenName: "Pulpit" ,
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika});
           }}
         >
           <HStack space="lg">
@@ -127,7 +104,8 @@ export default function Send({ navigation }: any) {
 
         <Pressable
           onPress={() => {
-            navigation.navigate("Send2");
+            navigation.navigate("Send4", { screenName: "Pulpit" ,
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika});
           }}
         >
           <HStack space="lg">

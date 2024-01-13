@@ -307,6 +307,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 26,
     marginLeft: "7%",
+    marginBottom: "10%",
   },
   labelSend: {
     fontSize: 12,

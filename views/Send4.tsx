@@ -19,7 +19,7 @@ interface PrzekazanaNazwa {
 }
 
 
-export default function Send2({ navigation }: any) {
+export default function Send4({ navigation }: any) {
   const [input, setInput] = useState<string>();
   const route = useRoute();
   const { kluczZalogowanegoUżytkownika } =
@@ -64,11 +64,11 @@ export default function Send2({ navigation }: any) {
       <Text style={styles.titleSend2}>Wyślij</Text>
 
       <Avatar size="lg" style={styles.profilAwatar2}>
-        <AvatarImage source={require("../assets/awatar2.png")} alt="odbiorca" />
+        <AvatarImage source={require("../assets/awatar3.png")} alt="odbiorca" />
       </Avatar>
 
-      <Text style={styles.nameSend2}>Michał</Text>
-      <Text style={styles.mailSend2}>michal4673@gmail.com</Text>
+      <Text style={styles.nameSend2}>Katarzyna</Text>
+      <Text style={styles.mailSend2}>katarzyna8749@gmail.com</Text>
 
       <Button
         style={styles.send2Amount}

@@ -36,7 +36,9 @@ export default function TransferCompleted({ navigation }: any) {
 
       <Button
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("Home", {
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+          });
         }}
         style={styles.registerNextButton}
         size="lg"
