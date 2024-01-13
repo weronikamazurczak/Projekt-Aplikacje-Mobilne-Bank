@@ -1,5 +1,5 @@
 import { Text, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import {
@@ -8,6 +8,7 @@ import {
   ButtonText,
   Avatar,
   AvatarImage,
+  ScrollView,
 } from "@gluestack-ui/themed";
 import ModernKeyboard from "react-native-modern-keyboard";
 import { useRoute } from "@react-navigation/native";
@@ -16,11 +17,40 @@ interface PrzekazanaNazwa {
   screenName?: string;
 }
 
+interface PrzekazanyKluczUzytkownika {
+  kluczZalogowanegoUżytkownika: string;
+}
+
 export default function Send2({ navigation }: any) {
   const [input, setInput] = useState<string>();
   const route = useRoute();
+  const { kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanyKluczUzytkownika;
   const { screenName } = route.params as PrzekazanaNazwa;
   console.log(screenName);
+
+  const [balanceFromDatabase, setBalanceFromDatabase] = useState("");
+
+  const fetchBalance = async () => {
+    try {
+      const response = await fetch(
+        "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/uzytkownicy.json"
+      );
+      const data = await response.json();
+
+      const user = data[kluczZalogowanegoUżytkownika];
+      if (user && user.balance) {
+        setBalanceFromDatabase(user.balance);
+      }
+    } catch (error) {
+      console.error("Błąd podczas pobierania danych z bazy danych:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBalance();
+  }, []);
+
   return (
     <View style={styles.send}>
       <Pressable
@@ -56,7 +86,7 @@ export default function Send2({ navigation }: any) {
 
       <Text style={styles.textSend2Amount}>Podaj kwote</Text>
 
-      <Text style={styles.send2Availablefunds}>Dostępne środki: 300 PLN</Text>
+      <Text style={styles.send2Availablefunds}>Dostępne środki: {balanceFromDatabase} PLN</Text>
 
       <Button
         onPress={() => {
@@ -74,11 +104,13 @@ export default function Send2({ navigation }: any) {
 
       <ModernKeyboard
         style={styles.keyboard}
-        size={55}
+        size={50}
         onInputChange={(value: string) => {
           setInput(value);
         }}
       />
+
+
     </View>
   );
 }

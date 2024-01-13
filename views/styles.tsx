@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#AEAEAE",
     alignSelf: "center",
-    marginBottom: "15%",
+    marginBottom: "2%",
   },
   transfer: {
     flex: 1,

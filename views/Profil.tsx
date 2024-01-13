@@ -29,6 +29,7 @@ export default function Profil({ navigation }: any) {
   const [nameFromDatabase, setNameFromDatabase] = useState("");
   const [emailFromDatabase, setEmailFromDatabase] = useState("");
   const [cardNumberFromDatabase, setCardNumberFromDatabase] = useState("");
+  const [balanceFromDatabase, setBalanceFromDatabase] = useState("");
 
   const fetchUserName = async () => {
     try {
@@ -77,10 +78,27 @@ export default function Profil({ navigation }: any) {
     }
   };
 
+  const fetchBalance = async () => {
+    try {
+      const response = await fetch(
+        "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/uzytkownicy.json"
+      );
+      const data = await response.json();
+
+      const user = data[kluczZalogowanegoUżytkownika];
+      if (user.balance) {
+        setBalanceFromDatabase(user.balance);
+      }
+    } catch (error) {
+      console.error("Błąd podczas pobierania danych z bazy danych:", error);
+    }
+  };
+
   useEffect(() => {
     fetchUserName();
     fetchUserEmail();
     fetchCardNumber();
+    fetchBalance();
   }, []);
 
   return (
@@ -100,6 +118,17 @@ export default function Profil({ navigation }: any) {
 
       <Text style={styles.nameProfil}>{nameFromDatabase}</Text>
       <Text style={styles.mailProfil}>{emailFromDatabase}</Text>
+
+      <Button 
+        size="md" 
+        variant="link" 
+        action="primary" 
+        isDisabled={false} 
+        isFocusVisible={false} >
+          <ButtonText style={{ color: "#000" }}>AKTUALNE SALDO: {balanceFromDatabase} PLN</ButtonText>
+          
+        </Button>
+
 
       <View style={{ rowGap: 18 }}>
         <FormControl
@@ -137,7 +166,7 @@ export default function Profil({ navigation }: any) {
             <InputField type="text" placeholder={emailFromDatabase} />
           </Input>
         </FormControl>
-
+      
         <FormControl
           size="sm"
           isDisabled={false}
