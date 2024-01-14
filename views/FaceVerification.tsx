@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "@gluestack-ui/themed";
 import { Button, ButtonText } from "@gluestack-ui/themed";
 import * as LocalAuthentication from "expo-local-authentication";
@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ZalogujUzytkownika } from "./Login";
 
 export default function FaceVerification({ navigation }: any) {
-  
+  const [isCredentials,setIsCredentials] = useState(true)
 
   const readCredentials = async () => {
     try {
@@ -20,6 +20,7 @@ export default function FaceVerification({ navigation }: any) {
         ZalogujUzytkownika(login,password,navigation)
       } else {
         console.log('Brak zapisanych danych.');
+        setIsCredentials(false);
       }
     } catch (error) {
       console.error('Błąd podczas odczytywania danych:', error);
@@ -46,7 +47,6 @@ export default function FaceVerification({ navigation }: any) {
           if (result.success) {
             console.log('Użytkownik zweryfikowany pomyślnie');
             readCredentials();
-            // tutaj trzeba dac logike logowania z zapisanych danych w sesji navigation.navigate("Home");
        
           } else {
             console.log('Autoryzacja nieudana');
@@ -58,8 +58,15 @@ export default function FaceVerification({ navigation }: any) {
     };
 
   return (
-    <View style={styles.register}>
-      <Text>FaceVerification</Text>
+    <View  marginTop={70} style={styles.register}>
+      <Text style={{
+          paddingTop: 10,
+          fontWeight: "bold",
+          fontSize: 32,
+          marginLeft: 10,
+          marginTop:10,
+          color: "#000",
+        }}>Skanowanie Twarzy</Text>
       <Button
         onPress={checkBiometrics}
         style={styles.registerNextButton}
@@ -69,7 +76,27 @@ export default function FaceVerification({ navigation }: any) {
         isDisabled={false}
         isFocusVisible={false}
       >
-        <ButtonText style={{ color: "#000" }}>Dalej</ButtonText>
+        <ButtonText style={{ color: "#000" }}>Skanuj Twarz</ButtonText>
+      </Button>
+      {!isCredentials && 
+         <Text style={{
+          paddingTop: 10,
+          fontWeight: "bold",
+          fontSize: 24,
+          marginLeft: 10,
+          color: "#000",
+        }}>nigdy nie bylo logowania z takiego telefonu</Text>
+      }
+            <Button
+        onPress={checkBiometrics}
+        style={styles.registerNextButton}
+        size="lg"
+        variant="solid"
+        action="primary"
+        isDisabled={false}
+        isFocusVisible={false}
+      >
+        <ButtonText style={{ color: "#000" }} onPress={() => {navigation.goBack()}}>Zaloguj się</ButtonText>
       </Button>
     </View>
   );
