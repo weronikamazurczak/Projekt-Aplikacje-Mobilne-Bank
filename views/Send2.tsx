@@ -29,6 +29,8 @@ export default function Send2({ navigation }: any) {
 
   const [balanceFromDatabase, setBalanceFromDatabase] = useState("");
 
+  const blednaKwota = !input || balanceFromDatabase < input;
+
   const fetchBalance = async () => {
     try {
       const response = await fetch(
@@ -48,6 +50,8 @@ export default function Send2({ navigation }: any) {
   useEffect(() => {
     fetchBalance();
   }, []);
+
+
 
   return (
     <View style={styles.send}>
@@ -96,12 +100,11 @@ export default function Send2({ navigation }: any) {
         size="lg"
         variant="solid"
         action="primary"
-        isDisabled={false}
+        isDisabled={blednaKwota}
         isFocusVisible={false}
       >
         <ButtonText style={{ color: "#000" }}>Wyślij</ButtonText>
       </Button>
-
       <ModernKeyboard
         style={styles.keyboard}
         size={50}

@@ -271,6 +271,7 @@ const styles = StyleSheet.create({
     color: "#AEAEAE",
     marginLeft: "80%",
     marginTop: -40,
+    marginBottom: "6%",
   },
   logoTransferCompleted: {
     height: 150,

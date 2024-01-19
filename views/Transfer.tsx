@@ -1,5 +1,5 @@
 import { Text, Pressable, ScrollView } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 import {
@@ -15,6 +15,10 @@ import {
   Button,
   ArrowRightIcon,
   ButtonIcon,
+  AlertCircleIcon,
+  FormControlError,
+  FormControlErrorIcon,
+  FormControlErrorText,
 } from "@gluestack-ui/themed";
 import { useRoute } from "@react-navigation/native";
 
@@ -31,6 +35,31 @@ export default function Transfer({ navigation }: any) {
   const [nazwaOdbiorcy, setNazwaOdbiorcy] = useState("");
   const [kwotaTransakcji, setKwotaTransakcji] = useState("");
   const [tutulPrzelewu, setTytulPrzelewu] = useState("");
+  const [balanceFromDatabase, setBalanceFromDatabase] = useState("");
+
+  const [czyNiePrawidlowaNazwaOdbiorcy, ustawCzyNiePrawidlowaNazwaOdbiorcy] = useState(false);
+  const [czyNiePrawidlowaKwota, ustawCzyNiePrawidlowaKwota] = useState(false);
+  const [czyNiePrawidlowyTutulPrzelewu, ustawCzyNiePrawidlowyTutulPrzelewu] = useState(false);
+
+  const fetchBalance = async () => {
+    try {
+      const response = await fetch(
+        "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/uzytkownicy.json"
+      );
+      const data = await response.json();
+
+      const user = data[kluczZalogowanegoUżytkownika];
+      if (user.balance) {
+        setBalanceFromDatabase(user.balance);
+      }
+    } catch (error) {
+      console.error("Błąd podczas pobierania danych z bazy danych:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBalance();
+  }, []);
 
   return (
     <ScrollView style={styles.transfer}>
@@ -65,7 +94,7 @@ export default function Transfer({ navigation }: any) {
               /> */}
             <VStack>
               <Heading size="sm">Konto VISA</Heading>
-              <Text>*1234 | $50,000</Text>
+              <Text>*1234 | {balanceFromDatabase} PLN</Text>
             </VStack>
           </Input>
         </FormControl>
@@ -73,7 +102,7 @@ export default function Transfer({ navigation }: any) {
         <FormControl
           size="sm"
           isDisabled={false}
-          isInvalid={false}
+          isInvalid={czyNiePrawidlowaNazwaOdbiorcy}
           isReadOnly={false}
           isRequired={true}
         >
@@ -86,18 +115,25 @@ export default function Transfer({ navigation }: any) {
             <InputField
               fontSize={14}
               type="text"
-              placeholder="Wyszukaj odbiorce po imieniu lub email"
+              placeholder="Wprowadź email odbiorcy"
               onChangeText={(nazwaOdbiorcy) => {
                 setNazwaOdbiorcy(nazwaOdbiorcy);
               }}
             />
           </Input>
+          <FormControlError style={styles.label}>
+            <FormControlErrorIcon as={AlertCircleIcon} />
+            <FormControlErrorText>
+              {" "}
+              Wprowadzony błędny email odbiorcy{" "}
+            </FormControlErrorText>
+          </FormControlError>
         </FormControl>
 
         <FormControl
           size="sm"
           isDisabled={false}
-          isInvalid={false}
+          isInvalid={czyNiePrawidlowaKwota}
           isReadOnly={false}
           isRequired={true}
         >
@@ -116,7 +152,15 @@ export default function Transfer({ navigation }: any) {
               }}
             />
           </Input>
+          
           <Text style={styles.textTransfer}>PLN</Text>
+          <FormControlError style={styles.label}>
+            <FormControlErrorIcon as={AlertCircleIcon} />
+            <FormControlErrorText>
+              {" "}
+              Wprowadzono błędną kwote{" "}
+            </FormControlErrorText>
+          </FormControlError>
         </FormControl>
       </View>
 
@@ -124,7 +168,7 @@ export default function Transfer({ navigation }: any) {
         <FormControl
           size="sm"
           isDisabled={false}
-          isInvalid={false}
+          isInvalid={czyNiePrawidlowyTutulPrzelewu}
           isReadOnly={false}
           isRequired={true}
         >
@@ -143,11 +187,37 @@ export default function Transfer({ navigation }: any) {
               }}
             />
           </Input>
+          <FormControlError style={styles.label}>
+            <FormControlErrorIcon as={AlertCircleIcon} />
+            <FormControlErrorText>
+              {" "}
+              Nie wprowadzono tytułu przelewu{" "}
+            </FormControlErrorText>
+          </FormControlError>
         </FormControl>
       </View>
 
       <Button
         onPress={() => {
+          if(!nazwaOdbiorcy || !nazwaOdbiorcy.includes("@")){
+            ustawCzyNiePrawidlowaNazwaOdbiorcy(true);
+          }else{
+            ustawCzyNiePrawidlowaNazwaOdbiorcy(false);
+          }
+          if(balanceFromDatabase<kwotaTransakcji || !kwotaTransakcji){
+            ustawCzyNiePrawidlowaKwota(true);
+          }else {
+            ustawCzyNiePrawidlowaKwota(false);
+          }
+          if(!tutulPrzelewu){
+            ustawCzyNiePrawidlowyTutulPrzelewu(true);
+          }else{
+            ustawCzyNiePrawidlowyTutulPrzelewu(false);
+          }
+          if (nazwaOdbiorcy && nazwaOdbiorcy.includes("@")
+            && balanceFromDatabase>=kwotaTransakcji
+            && tutulPrzelewu)
+          {
           WyslijPrzelewDoBazy(kluczZalogowanegoUżytkownika,{
             nazwaOdbiorcy: nazwaOdbiorcy,
             kwotaTransakcji: kwotaTransakcji,
@@ -155,7 +225,7 @@ export default function Transfer({ navigation }: any) {
           });
           navigation.navigate("TransferCompleted", {
             kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
-          });
+          });}
         }}
         style={styles.registerNextButton}
         size="lg"
