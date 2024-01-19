@@ -37,9 +37,11 @@ export default function Transfer({ navigation }: any) {
   const [tutulPrzelewu, setTytulPrzelewu] = useState("");
   const [balanceFromDatabase, setBalanceFromDatabase] = useState("");
 
-  const [czyNiePrawidlowaNazwaOdbiorcy, ustawCzyNiePrawidlowaNazwaOdbiorcy] = useState(false);
+  const [czyNiePrawidlowaNazwaOdbiorcy, ustawCzyNiePrawidlowaNazwaOdbiorcy] =
+    useState(false);
   const [czyNiePrawidlowaKwota, ustawCzyNiePrawidlowaKwota] = useState(false);
-  const [czyNiePrawidlowyTutulPrzelewu, ustawCzyNiePrawidlowyTutulPrzelewu] = useState(false);
+  const [czyNiePrawidlowyTutulPrzelewu, ustawCzyNiePrawidlowyTutulPrzelewu] =
+    useState(false);
 
   const fetchBalance = async () => {
     try {
@@ -152,7 +154,7 @@ export default function Transfer({ navigation }: any) {
               }}
             />
           </Input>
-          
+
           <Text style={styles.textTransfer}>PLN</Text>
           <FormControlError style={styles.label}>
             <FormControlErrorIcon as={AlertCircleIcon} />
@@ -199,33 +201,41 @@ export default function Transfer({ navigation }: any) {
 
       <Button
         onPress={() => {
-          if(!nazwaOdbiorcy || !nazwaOdbiorcy.includes("@")){
+          if (!nazwaOdbiorcy || !nazwaOdbiorcy.includes("@")) {
             ustawCzyNiePrawidlowaNazwaOdbiorcy(true);
-          }else{
+          } else {
             ustawCzyNiePrawidlowaNazwaOdbiorcy(false);
           }
-          if(balanceFromDatabase<kwotaTransakcji || !kwotaTransakcji){
+          if (balanceFromDatabase < kwotaTransakcji || !kwotaTransakcji) {
             ustawCzyNiePrawidlowaKwota(true);
-          }else {
+          } else {
             ustawCzyNiePrawidlowaKwota(false);
           }
-          if(!tutulPrzelewu){
+          if (!tutulPrzelewu) {
             ustawCzyNiePrawidlowyTutulPrzelewu(true);
-          }else{
+          } else {
             ustawCzyNiePrawidlowyTutulPrzelewu(false);
           }
-          if (nazwaOdbiorcy && nazwaOdbiorcy.includes("@")
-            && balanceFromDatabase>=kwotaTransakcji
-            && tutulPrzelewu)
-          {
-          WyslijPrzelewDoBazy(kluczZalogowanegoUżytkownika,{
-            nazwaOdbiorcy: nazwaOdbiorcy,
-            kwotaTransakcji: kwotaTransakcji,
-            tutulPrzelewu: tutulPrzelewu,
-          });
-          navigation.navigate("TransferCompleted", {
-            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
-          });}
+          if (
+            nazwaOdbiorcy &&
+            nazwaOdbiorcy.includes("@") &&
+            balanceFromDatabase >= kwotaTransakcji &&
+            tutulPrzelewu
+          ) {
+            const newBalance =
+              Number(balanceFromDatabase) - Number(kwotaTransakcji);
+            WyslijPrzelewDoBazy(kluczZalogowanegoUżytkownika, {
+              nazwaOdbiorcy: nazwaOdbiorcy,
+              kwotaTransakcji: kwotaTransakcji,
+              tutulPrzelewu: tutulPrzelewu,
+            });
+            ZaktualizujStanKonta(kluczZalogowanegoUżytkownika, {
+              balance: newBalance,
+            });
+            navigation.navigate("TransferCompleted", {
+              kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+            });
+          }
         }}
         style={styles.registerNextButton}
         size="lg"
@@ -241,18 +251,49 @@ export default function Transfer({ navigation }: any) {
   );
 }
 
-async function WyslijPrzelewDoBazy( kluczZalogowanegoUżytkownika:string, obiekt: object) {
+async function WyslijPrzelewDoBazy(
+  kluczZalogowanegoUżytkownika: string,
+  obiekt: object
+) {
   const firebaseLinkDoBazy =
     "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
   const sciezkaDoBazy = "/transakcje";
   const kluczAktualnieZalogowanegoUzytkownika =
     "/" + kluczZalogowanegoUżytkownika + ".json";
-    console.log(kluczZalogowanegoUżytkownika);
+  console.log(kluczZalogowanegoUżytkownika);
   const ApiKey = "AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24";
   const LinkZadania = `${firebaseLinkDoBazy}${sciezkaDoBazy}${kluczAktualnieZalogowanegoUzytkownika}?key=${ApiKey}`;
   try {
     const response = await fetch(LinkZadania, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obiekt),
+    });
+    if (response.ok) {
+      console.log("Dane transakcji przelwu wyslane do bazy");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function ZaktualizujStanKonta(
+  kluczZalogowanegoUżytkownika: string,
+  obiekt: object
+) {
+  const firebaseLinkDoBazy =
+    "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
+  const sciezkaDoBazy = "/uzytkownicy";
+  const kluczAktualnieZalogowanegoUzytkownika =
+    "/" + kluczZalogowanegoUżytkownika + ".json";
+  console.log(kluczZalogowanegoUżytkownika);
+  const ApiKey = "AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24";
+  const LinkZadania = `${firebaseLinkDoBazy}${sciezkaDoBazy}${kluczAktualnieZalogowanegoUzytkownika}?key=${ApiKey}`;
+  try {
+    const response = await fetch(LinkZadania, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },

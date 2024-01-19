@@ -86,6 +86,7 @@ export default function Profil({ navigation }: any) {
       const data = await response.json();
 
       const user = data[kluczZalogowanegoUżytkownika];
+      console.log(user);
       if (user.balance) {
         setBalanceFromDatabase(user.balance);
       }
@@ -119,16 +120,17 @@ export default function Profil({ navigation }: any) {
       <Text style={styles.nameProfil}>{nameFromDatabase}</Text>
       <Text style={styles.mailProfil}>{emailFromDatabase}</Text>
 
-      <Button 
-        size="md" 
-        variant="link" 
-        action="primary" 
-        isDisabled={false} 
-        isFocusVisible={false} >
-          <ButtonText style={{ color: "#000" }}>AKTUALNE SALDO: {balanceFromDatabase} PLN</ButtonText>
-          
-        </Button>
-
+      <Button
+        size="md"
+        variant="link"
+        action="primary"
+        isDisabled={false}
+        isFocusVisible={false}
+      >
+        <ButtonText style={{ color: "#000" }}>
+          AKTUALNE SALDO: {balanceFromDatabase} PLN
+        </ButtonText>
+      </Button>
 
       <View style={{ rowGap: 18 }}>
         <FormControl
@@ -166,7 +168,7 @@ export default function Profil({ navigation }: any) {
             <InputField type="text" placeholder={emailFromDatabase} />
           </Input>
         </FormControl>
-      
+
         <FormControl
           size="sm"
           isDisabled={false}

@@ -94,6 +94,7 @@ function TabNavigator() {
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="user" size={24} color={color} />
           ),
+          unmountOnBlur: true,
         }}
         initialParams={{
           kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,

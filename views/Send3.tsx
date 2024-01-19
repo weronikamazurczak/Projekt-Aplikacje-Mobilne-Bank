@@ -18,12 +18,10 @@ interface PrzekazanaNazwa {
   kluczZalogowanegoUżytkownika: string;
 }
 
-
 export default function Send3({ navigation }: any) {
   const [input, setInput] = useState<string>();
   const route = useRoute();
-  const { kluczZalogowanegoUżytkownika } =
-    route.params as PrzekazanaNazwa;
+  const { kluczZalogowanegoUżytkownika } = route.params as PrzekazanaNazwa;
   const { screenName } = route.params as PrzekazanaNazwa;
   console.log(screenName);
 
@@ -55,8 +53,10 @@ export default function Send3({ navigation }: any) {
     <View style={styles.send}>
       <Pressable
         onPress={() => {
-          navigation.navigate("Send", { screenName: screenName , 
-            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika});
+          navigation.navigate("Send", {
+            screenName: screenName,
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+          });
         }}
         style={styles.arrow}
       >
@@ -87,12 +87,26 @@ export default function Send3({ navigation }: any) {
 
       <Text style={styles.textSend2Amount}>Podaj kwote</Text>
 
-      <Text style={styles.send2Availablefunds}>Dostępne środki: {balanceFromDatabase} PLN</Text>
+      <Text style={styles.send2Availablefunds}>
+        Dostępne środki: {balanceFromDatabase} PLN
+      </Text>
 
       <Button
-        onPress={() => {
-          navigation.navigate("TransferCompleted", { screenName: screenName , 
-            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika});
+        onPress={async () => {
+          const newBalance = Number(balanceFromDatabase) - Number(input);
+
+          const czyzaktualizowany = await ZaktualizujStanKonta(
+            kluczZalogowanegoUżytkownika,
+            {
+              balance: newBalance,
+            }
+          );
+          if (czyzaktualizowany) {
+            navigation.navigate("TransferCompleted", {
+              screenName: screenName,
+              kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+            });
+          }
         }}
         style={styles.send2NextButton}
         size="lg"
@@ -111,8 +125,36 @@ export default function Send3({ navigation }: any) {
           setInput(value);
         }}
       />
-
-
     </View>
   );
+}
+
+async function ZaktualizujStanKonta(
+  kluczZalogowanegoUżytkownika: string,
+  obiekt: object
+) {
+  const firebaseLinkDoBazy =
+    "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
+  const sciezkaDoBazy = "/uzytkownicy";
+  const kluczAktualnieZalogowanegoUzytkownika =
+    "/" + kluczZalogowanegoUżytkownika + ".json";
+  console.log(kluczZalogowanegoUżytkownika);
+  const ApiKey = "AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24";
+  const LinkZadania = `${firebaseLinkDoBazy}${sciezkaDoBazy}${kluczAktualnieZalogowanegoUzytkownika}?key=${ApiKey}`;
+  try {
+    const response = await fetch(LinkZadania, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obiekt),
+    });
+    if (response.ok) {
+      console.log("Dane transakcji przelwu wyslane do bazy");
+      return true;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return false;
 }
