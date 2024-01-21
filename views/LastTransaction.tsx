@@ -1,107 +1,124 @@
-import { View, Text, ScrollView, Pressable } from "@gluestack-ui/themed";
-import { AntDesign } from "@expo/vector-icons";
-import styles from "./styles";
-import React from "react";
+import { View, Text, ScrollView } from "@gluestack-ui/themed";
+import React, { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { useIsFocused } from '@react-navigation/native';
 interface TransactionListI {
   name: string;
   amount: number;
   typePay: string;
 }
-export const LastTransaction = ({ navigation }: any) => {
-  const TransactionElement = (
-    arrayTransaction: TransactionListI[],
-    dateTime: string
-  ) => {
-    return arrayTransaction.map((item, index) => (
-      <View
-        key={index}
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingVertical: 8,
-          marginHorizontal: 15,
-          borderBottomColor: "gray",
-          borderBottomWidth: 1,
-        }}
-      >
-        <View style={{}}>
-          <Text style={{ fontSize: 18, fontWeight: "bold", color: "#000" }}>
-            {item.name}
-          </Text>
-          <Text style={{ color: "gray", fontSize: 14 }}>{item.typePay}</Text>
-        </View>
-        <View>
-          <Text style={{ fontSize: 18, color: "#000", fontWeight: "bold" }}>
-            {"-" + item.amount + " PLN"}
-          </Text>
-          <Text style={{ color: "gray", fontSize: 14 }}>{dateTime}</Text>
-        </View>
-      </View>
-    ));
-  };
-  const transaction = [
-    {
-      dateTime: "Niedziela, 21.03.2023",
-      transactionList: [
-        { name: "netflix", amount: 20, typePay: "Trasakcja kartą płatniczą" },
-        { name: "spotify", amount: 30, typePay: "Trasakcja kartą płatniczą" },
-      ],
-    },
-    {
-      dateTime: "Poniedziałek, 23.03.2023",
-      transactionList: [
-        { name: "youtube", amount: 120, typePay: "Trasakcja kartą płatniczą" },
-        { name: "spotify", amount: 120, typePay: "Trasakcja kartą płatniczą" },
-        { name: "spotify", amount: 120, typePay: "Trasakcja kartą płatniczą" },
-      ],
-    },
-    {
-      dateTime: "Wtorek, 26.03.2023",
-      transactionList: [
-        { name: "youtube", amount: 120, typePay: "Trasakcja kartą płatniczą" },
-        { name: "spotify", amount: 120, typePay: "Trasakcja kartą płatniczą" },
-        { name: "spotify", amount: 120, typePay: "Trasakcja kartą płatniczą" },
-        { name: "spotify", amount: 150, typePay: "Trasakcja kartą płatniczą" },
-      ],
-    },
-  ];
+interface FirebaseTransaction {
+  nazwaOdbiorcy: string;
+  kwotaTransakcji: string;
+  tutulPrzelewu: string;
+}
+interface TransactionWithId {
+  transactionId: string;
+  transactionData: TransactionListI;
+}
 
-  return (
-    <View marginBottom={30}>
-      {transaction.map((item, index) => {
-        return (
-          <View key={index}>
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 18,
-                marginTop: 20,
-                backgroundColor: "#cccccc",
-                padding: 5,
-                textAlign: "center",
-              }}
-            >
-              {item.dateTime}
-            </Text>
-            {TransactionElement(item.transactionList, item.dateTime)}
-          </View>
+interface LastTransactionProps {
+  navigation: any;
+  kluczZalogowanegoUżytkownika: string;
+}
+
+export const LastTransaction = ({ navigation,kluczZalogowanegoUżytkownika }: LastTransactionProps) => {
+  const [transactions, setTransactions] = useState<TransactionWithId[]>([]);
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await fetch(
+          "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/transakcje/"+kluczZalogowanegoUżytkownika+".json"
         );
-      })}
+        const data = (await response.json()) as Record<string, FirebaseTransaction>;
+
+          if(data){
+            const loadedTransactions: TransactionWithId[] = Object.entries(data).map(([key, transactionInfo]) => ({
+     
+              transactionId: key,
+              transactionData: {
+                name: transactionInfo.nazwaOdbiorcy,
+                amount: parseFloat(transactionInfo.kwotaTransakcji),
+                typePay: transactionInfo.tutulPrzelewu,
+              },
+            }));
+            setTransactions(loadedTransactions);
+          }
+          else{
+            setTransactions([]);
+          }
+        // Przetwarzanie danych i aktualizacja stanu
+  
+
+        
+      } catch (error) {
+        console.error("Błąd podczas pobierania danych z bazy danych:", error);
+      }
+    };
+      if(isFocused)
+    fetchTransactions();
+  }, [isFocused]);
+
+  const TransactionElement = (transaction: TransactionListI) => (
+    <View
+      key={transaction.name}
+      style={styles.transactionElement} // Styl powinien być zdefiniowany w pliku styles
+    >
+      <View style={styles.transactionDetail}>
+        <Text style={styles.transactionName}>{transaction.name}</Text>
+        <Text style={styles.transactionType}>{transaction.typePay}</Text>
+      </View>
+      <View style={styles.transactionAmount}>
+        <Text style={styles.transactionAmountText}>
+          {"-" + transaction.amount + " PLN"}
+        </Text>
+      </View>
     </View>
   );
+
+  return (
+    <ScrollView style={styles.container}>
+      {transactions.map((item) => TransactionElement(item.transactionData))}
+    </ScrollView>
+  );
+
+
 };
 
-//Obiekt z bazy:
-/*
-transakcje:{
-  kluczAktualnieZalogowanegoUzytkownika:{
-    kluczTranskacji1:{
-      kwotaTransakcji: "123"
-      nazwaOdbiorcy: "sdfsdf"
-      tutulPrzelewu: "asdf"
-      (TE TRZY POLA SĄ Z EKRANU PRZELEW KRAJOWY GDZIE WPISUJE SIE ODBIORCE, KWOTE, TYUL )
-    }
-  }
-}
-*/
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  transactionElement: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc',
+    backgroundColor: 'white',
+  },
+  transactionDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  transactionName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  transactionType: {
+    fontSize: 14,
+    color: 'gray',
+  },
+  transactionAmount: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  transactionAmountText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'red', // Przykładowy kolor, zmień według potrzeb
+  },
+});

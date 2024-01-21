@@ -241,7 +241,7 @@ export default function HomeScreen({ navigation }: any) {
       >
         Ostatnie Transakcje
       </Text>
-      <LastTransaction navigation={navigation} />
+      <LastTransaction kluczZalogowanegoUżytkownika={kluczZalogowanegoUżytkownika} navigation={navigation} />
     </ScrollView>
   );
 }

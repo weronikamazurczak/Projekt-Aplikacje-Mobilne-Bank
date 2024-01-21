@@ -42,7 +42,7 @@ export default function Historia({ navigation }: any) {
       >
         Ostatnie Transakcje
       </Text>
-      <LastTransaction />
+      <LastTransaction navigation={navigation} kluczZalogowanegoUżytkownika={kluczZalogowanegoUżytkownika}/>
     </ScrollView>
   );
 }
