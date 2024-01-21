@@ -155,6 +155,7 @@ export default function HomeScreen({ navigation }: any) {
         style={{
           flexDirection: "row",
           justifyContent: "space-around",
+          marginTop:40
         }}
       >
         <View>

@@ -146,17 +146,6 @@ export default function Login({ navigation }: any) {
 
       </View>
  
-        <Button onPress={() => navigation.navigate("FaceVerification")}
-                style={styles.registerNextButton}
-                size="lg"
-                variant="solid"
-                action="primary"
-                isDisabled={false}
-                isFocusVisible={false}>
-      <ButtonText style={{ color: "#000" }}>
-           skanuj twarz
-          </ButtonText>
-        </Button>
         
     </View>
   );
@@ -167,13 +156,7 @@ export async function ZalogujUzytkownika(
   password: string,
   navigation: any
 ) {
-  const saveCredentials = (login: string, password: string) => {
- 
-    AsyncStorage.setItem('login', login);
-    AsyncStorage.setItem('password', password);
-   console.log('Dane zapisane pomyślnie!');
 
-};
   const firebaseLinkDoBazy =
     "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
   const sciezkaDoBazy = "/uzytkownicy.json";
@@ -189,7 +172,16 @@ export async function ZalogujUzytkownika(
         aktualniePobranyUzytkownik.password == password
       )
       {
-        saveCredentials(email,password);
+       
+        if(aktualniePobranyUzytkownik.isFaceID){
+          navigation.navigate("FaceVerification", {kluczZalogowanegoUżytkownika: aktualniePobranaDana} )
+          console.log("jestFaceID")
+        }
+        else {
+          navigation.navigate("Home", {
+            kluczZalogowanegoUżytkownika: aktualniePobranaDana,
+          });
+        }
         if(aktualniePobranyUzytkownik.biometricAuthFinger){
           // Jeśli biometricAuthFinger jest true, poproś o weryfikację palcem
           const result = await LocalAuthentication.authenticateAsync({
@@ -208,6 +200,7 @@ export async function ZalogujUzytkownika(
           });
         }
       }
+      
       
     }
   } catch (error) {

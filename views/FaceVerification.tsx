@@ -3,32 +3,17 @@ import { View, Text } from "@gluestack-ui/themed";
 import { Button, ButtonText } from "@gluestack-ui/themed";
 import * as LocalAuthentication from "expo-local-authentication";
 import styles from "./styles";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ZalogujUzytkownika } from "./Login";
+import { useRoute } from "@react-navigation/native";
+
+interface PrzekazanyKluczUzytkownika {
+  kluczZalogowanegoUżytkownika: string;
+}
 
 export default function FaceVerification({ navigation }: any) {
-  const [isCredentials,setIsCredentials] = useState(true)
-  const [isFaceVerification,setIsFaceVerification] = useState(true)
-  const readCredentials = async () => {
-    try {
-      const login = await AsyncStorage.getItem('login');
-      const password = await AsyncStorage.getItem('password');
-  
-      if (login !== null && password !== null) {
-        console.log('Login:', login);
-        console.log('Hasło:', password);
-        ZalogujUzytkownika(login,password,navigation)
-      } else {
-        console.log('Brak zapisanych danych.');
-        setIsCredentials(false);
-      }
-    } catch (error) {
-      console.error('Błąd podczas odczytywania danych:', error);
-    }
-  };
-    useEffect(()=>{
+  const route = useRoute();
+  const { kluczZalogowanegoUżytkownika } =
+    route.params as PrzekazanyKluczUzytkownika;
 
-    },[])
     const checkBiometrics = async () => {
       try {
        
@@ -46,14 +31,18 @@ export default function FaceVerification({ navigation }: any) {
 
           if (result.success) {
             console.log('Użytkownik zweryfikowany pomyślnie');
-            readCredentials();
+            navigation.navigate("Home", {
+              kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+            });
        
           } else {
             console.log('Autoryzacja nieudana');
           }
         }
         else{
-          setIsFaceVerification(false)
+          navigation.navigate("Home", {
+            kluczZalogowanegoUżytkownika: kluczZalogowanegoUżytkownika,
+          });
         }
       } catch (error) {
         console.error(error);
@@ -81,34 +70,17 @@ export default function FaceVerification({ navigation }: any) {
       >
         <ButtonText style={{ color: "#000" }}>Skanuj Twarz</ButtonText>
       </Button>
-      {!isCredentials && 
-         <Text style={{
-          paddingTop: 10,
-          fontWeight: "bold",
-          fontSize: 24,
-          marginLeft: 10,
-          color: "#000",
-        }}>nigdy nie bylo logowania z takiego telefonu</Text>
-      }
-            {!isFaceVerification && 
-         <Text style={{
-          paddingTop: 10,
-          fontWeight: "bold",
-          fontSize: 24,
-          marginLeft: 10,
-          color: "#000",
-        }}>Telefon nie posiada weryfikacjii twarzy!!!!</Text>
-      }
+
             <Button
-        onPress={checkBiometrics}
         style={styles.registerNextButton}
         size="lg"
         variant="solid"
         action="primary"
         isDisabled={false}
         isFocusVisible={false}
+        onPress={() => {navigation.goBack()}}
       >
-        <ButtonText style={{ color: "#000" }} onPress={() => {navigation.goBack()}}>Zaloguj się</ButtonText>
+        <ButtonText style={{ color: "#000" }}>Cofnij</ButtonText>
       </Button>
     </View>
   );

@@ -14,6 +14,7 @@ interface DaneRejestracja {
   cardDate?: string | undefined;
   cvv?: string | undefined;
   balance?: string | undefined;
+  isFaceID: boolean | undefined;
 }
 
 export default function FingerVerification({ navigation }: any) {
@@ -29,6 +30,7 @@ export default function FingerVerification({ navigation }: any) {
   const { cardDate } = route.params as DaneRejestracja;
   const { cvv } = route.params as DaneRejestracja;
   const { balance } = route.params as DaneRejestracja;
+  const { isFaceID }= route.params as DaneRejestracja;
 
   useEffect(() => {
     (async () => {
@@ -55,6 +57,7 @@ export default function FingerVerification({ navigation }: any) {
         cardDate: cardDate,
         cvv: cvv,
         balance: balance,
+        isFaceID:isFaceID,
         biometricAuthFinger: result.success, // Przekazujesz wartość result.success
       });
       navigation.navigate("SuccessfulVerification");
@@ -109,6 +112,7 @@ export default function FingerVerification({ navigation }: any) {
             cardDate: cardDate,
             cvv: cvv,
             balance: balance,
+            isFaceID: isFaceID,
             biometricAuthFinger: false, // Przekazujesz wartość result.success
           });
           navigation.navigate("SuccessfulVerification");
