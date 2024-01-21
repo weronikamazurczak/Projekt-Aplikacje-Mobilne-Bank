@@ -68,11 +68,11 @@ export const LastTransaction = ({ navigation,kluczZalogowanegoUżytkownika }: La
       style={styles.transactionElement} // Styl powinien być zdefiniowany w pliku styles
     >
       <View style={styles.transactionDetail}>
-        <Text style={styles.transactionName}>{transaction.name}</Text>
-        <Text style={styles.transactionType}>{transaction.typePay}</Text>
+        <Text style={styles.transactionName}>Odbiorca: {transaction.name}</Text>
+        <Text style={styles.transactionType}>Tytuł: {transaction.typePay}</Text>
       </View>
       <View style={styles.transactionAmount}>
-        <Text style={styles.transactionAmountText}>
+        <Text style={styles.transactionTextAmount}>
           {"-" + transaction.amount + " PLN"}
         </Text>
       </View>
@@ -116,9 +116,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  transactionAmountText: {
+  transactionTextAmount:{    
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'red', // Przykładowy kolor, zmień według potrzeb
-  },
+    color:"red",},
 });
