@@ -93,6 +93,12 @@ export default function Send3({ navigation }: any) {
 
       <Button
         onPress={async () => {
+          WyslijPrzelewDoBazy(kluczZalogowanegoUżytkownika, {
+            nazwaOdbiorcy: 'bartlomiej264@gmail.com',
+            kwotaTransakcji: input,
+            tutulPrzelewu: 'Szybki przelew',
+          });
+
           const newBalance = Number(balanceFromDatabase) - Number(input);
 
           const czyzaktualizowany = await ZaktualizujStanKonta(
@@ -157,4 +163,32 @@ async function ZaktualizujStanKonta(
     console.error(error);
   }
   return false;
+}
+
+async function WyslijPrzelewDoBazy(
+  kluczZalogowanegoUżytkownika: string,
+  obiekt: object
+) {
+  const firebaseLinkDoBazy =
+    "https://bank-app-3a23b-default-rtdb.europe-west1.firebasedatabase.app/";
+  const sciezkaDoBazy = "/transakcje";
+  const kluczAktualnieZalogowanegoUzytkownika =
+    "/" + kluczZalogowanegoUżytkownika + ".json";
+  console.log(kluczZalogowanegoUżytkownika);
+  const ApiKey = "AIzaSyClXS4Fq6KgC-Ij_3u9XJxSvwfEalkXj24";
+  const LinkZadania = `${firebaseLinkDoBazy}${sciezkaDoBazy}${kluczAktualnieZalogowanegoUzytkownika}?key=${ApiKey}`;
+  try {
+    const response = await fetch(LinkZadania, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obiekt),
+    });
+    if (response.ok) {
+      console.log("Dane transakcji przelwu wyslane do bazy");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }

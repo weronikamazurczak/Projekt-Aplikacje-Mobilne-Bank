@@ -177,12 +177,12 @@ export async function ZalogujUzytkownika(
           navigation.navigate("FaceVerification", {kluczZalogowanegoUżytkownika: aktualniePobranaDana} )
           console.log("jestFaceID")
         }
-        else {
-          navigation.navigate("Home", {
-            kluczZalogowanegoUżytkownika: aktualniePobranaDana,
-          });
-        }
-        if(aktualniePobranyUzytkownik.biometricAuthFinger){
+        // else {
+        //   navigation.navigate("Home", {
+        //     kluczZalogowanegoUżytkownika: aktualniePobranaDana,
+        //   });
+        // }
+        else if(aktualniePobranyUzytkownik.biometricAuthFinger){
           // Jeśli biometricAuthFinger jest true, poproś o weryfikację palcem
           const result = await LocalAuthentication.authenticateAsync({
             promptMessage: 'Autoryzacja przy użyciu TouchID',
