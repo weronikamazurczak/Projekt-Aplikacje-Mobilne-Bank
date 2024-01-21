@@ -8,7 +8,7 @@ import { ZalogujUzytkownika } from "./Login";
 
 export default function FaceVerification({ navigation }: any) {
   const [isCredentials,setIsCredentials] = useState(true)
-
+  const [isFaceVerification,setIsFaceVerification] = useState(true)
   const readCredentials = async () => {
     try {
       const login = await AsyncStorage.getItem('login');
@@ -52,6 +52,9 @@ export default function FaceVerification({ navigation }: any) {
             console.log('Autoryzacja nieudana');
           }
         }
+        else{
+          setIsFaceVerification(false)
+        }
       } catch (error) {
         console.error(error);
       }
@@ -86,6 +89,15 @@ export default function FaceVerification({ navigation }: any) {
           marginLeft: 10,
           color: "#000",
         }}>nigdy nie bylo logowania z takiego telefonu</Text>
+      }
+            {!isFaceVerification && 
+         <Text style={{
+          paddingTop: 10,
+          fontWeight: "bold",
+          fontSize: 24,
+          marginLeft: 10,
+          color: "#000",
+        }}>Telefon nie posiada weryfikacjii twarzy!!!!</Text>
       }
             <Button
         onPress={checkBiometrics}
