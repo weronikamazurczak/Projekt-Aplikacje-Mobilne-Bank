@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import * as LocalAuthentication from "expo-local-authentication";
-import { ButtonText, View, Text, Button, Pressable,Image } from "@gluestack-ui/themed";
+import { ButtonText, View, Text, Button, Pressable,Image, ScrollView } from "@gluestack-ui/themed";
 import styles from "./styles";
 import { useRoute } from "@react-navigation/native";
 
@@ -73,7 +73,7 @@ export default function FaceVeryficationAdd({ navigation }: any) {
   };
 
   return (
-    <View style={styles.fingerVerification}>
+    <ScrollView style={styles.fingerVerification}>
       <Pressable
         onPress={() => {
           navigation.navigate("AddCard", {
@@ -135,7 +135,7 @@ export default function FaceVeryficationAdd({ navigation }: any) {
         <ButtonText style={{ color: "#000" }}>Pomiń na razie</ButtonText>
       </Button>
       
-    </View>
+    </ScrollView>
   );
 }
 
