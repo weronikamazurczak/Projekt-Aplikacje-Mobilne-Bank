@@ -26,6 +26,8 @@ import Send2 from "./Send2";
 import Historia from "./Historia";
 import Send3 from "./Send3";
 import Send4 from "./Send4";
+import SuccessfullFaceVeryfication from "./SuccessfullFaceVeryfication";
+import FaceVeryficationAdd from "./FaceVeryficationAdd";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -140,6 +142,9 @@ export default function App() {
           <Stack.Screen name="Send2" component={Send2} />
           <Stack.Screen name="Send3" component={Send3} />
           <Stack.Screen name="Send4" component={Send4} />
+
+          <Stack.Screen name="SuccessfullFaceVeryfication" component={SuccessfullFaceVeryfication} />
+          <Stack.Screen name="FaceVeryficationAdd" component={FaceVeryficationAdd} />
           <Stack.Screen
             name="Historia"
             component={Historia}

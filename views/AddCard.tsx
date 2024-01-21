@@ -36,7 +36,6 @@ export const AddCard = ({ navigation }: any) => {
   const [cardNumber, setCardNumber] = useState("");
   const [cardDate, setCardDate] = useState("");
   const [cvv, setCvv] = useState("");
-  const [isFaceID,setIsFaceID] = useState(false)
 
   const [czyNiePrawidlowyNumerKarty, ustawCzyNiePrawidlowyNumerKarty] =
     useState(false);
@@ -54,10 +53,7 @@ export const AddCard = ({ navigation }: any) => {
   const { password } = route.params as DaneRejestracja;
   const { confirmPassword } = route.params as DaneRejestracja;
 
-  const handleCheckboxChange = () => {
-    setIsFaceID(!isFaceID);
-    console.log(!isFaceID)
-  };
+
   return (
     <View style={styles.register}>
       <Pressable
@@ -185,22 +181,6 @@ export const AddCard = ({ navigation }: any) => {
         </CheckboxLabel>
       </Checkbox>
 
-      <Checkbox
-        style={{ marginLeft: '7%', marginTop: 50 }}
-        aria-label='polityka prywatności checkbox'
-        size='md'
-        isInvalid={false}
-        isDisabled={false}
-        value={isFaceID.toString()}
-        onChange={handleCheckboxChange} // Dodanie obsługi zmiany
-      >
-        <CheckboxIndicator mr='$2'>
-          <CheckboxIcon style={styles.checkTitleStyle} as={CheckIcon} />
-        </CheckboxIndicator>
-        <CheckboxLabel style={styles.checkTitleStyle}>
-          Czy używać skanowania twarzy?
-        </CheckboxLabel>
-      </Checkbox>
 
       <Button
         onPress={() => {
@@ -235,7 +215,7 @@ export const AddCard = ({ navigation }: any) => {
               !czyNiePrawidlowaDataWygasniecia,
               !czyNiePrawidlowyNumerCVC
             );
-            navigation.navigate("FingerVerification", {
+            navigation.navigate("FaceVeryficationAdd", {
               name: name,
               email: email,
               password: password,
@@ -243,8 +223,7 @@ export const AddCard = ({ navigation }: any) => {
               cardNumber: cardNumber,
               cardDate: cardDate,
               cvv: cvv,
-              balance: 100,
-              isFaceID:isFaceID
+              balance: 100
             });
           }
         }}

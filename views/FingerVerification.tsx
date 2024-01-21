@@ -69,7 +69,12 @@ export default function FingerVerification({ navigation }: any) {
     <View style={styles.fingerVerification}>
       <Pressable
         onPress={() => {
-          navigation.navigate("AddCard");
+          navigation.navigate("AddCard", {
+            name: name,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+          });
         }}
         style={styles.arrow}
       >
