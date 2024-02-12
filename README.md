@@ -21,3 +21,4 @@ Aplikacja Mobilna Banku to aplikacja stworzona w ramach projektu "Aplikacje Mobi
 
 
 ## 🖌 Prezentacja
+
